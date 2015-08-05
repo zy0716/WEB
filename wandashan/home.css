@@ -1,0 +1,598 @@
+
+
+body {
+    background-color: white;
+    font: 14px 微软雅黑, 黑体, Verdana, sans-serif;
+    border-top: 4px solid #023591;
+}
+/*页面布局*/
+.wrap{
+    width: 1400px;
+    margin: 0 auto;
+}
+header.top{
+    width: 1400px;
+    height: 507px;
+}
+footer.top{
+    width: 100%;
+    height: 246px;
+    margin-top: 20px;
+    border-top: outset;
+
+
+}
+/*头部*/
+.bg-header{
+    height: 507px;
+    width: 1400px;
+    position: absolute;
+
+    z-index: -1;
+}
+.bg-header img{
+    width: 1400px;
+    height: 507px;
+}
+/*logo*/
+.logo{
+    float: left;
+}
+.logo h1{
+    margin-left: 30px;
+    width: 378px;
+    height: 160px;
+    background: url(images/photo-tu.png) no-repeat 20px -60px;
+}
+/*首导航*/
+.nav{
+    background-color: #023591;
+    width: 800px;
+    height: 40px;
+    float: left;
+    margin-top: 100px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.3) ;
+    border: 1px solid #ffffff;
+
+
+}
+.nav li{
+    float: left;
+
+}
+.nav li a{
+    margin: 0 20px;
+    font-size: 20px;
+    line-height: 40px;
+    color: #ffffff;
+    text-align: center;
+}
+.nav li i{
+    border-left: 4px solid #052358;
+    border-right: 4px solid #4e66da;
+}
+/*主页部分*/
+.module-1{
+    height: 820px;
+    margin-top: 20px;
+}
+.product{
+    height: 820px;
+    width: 1300px;
+    background-color: #e7feff;
+    float: left;
+}
+.product header{
+    float: left;
+    margin-top: -126px;
+    width: 274px;
+    height: 126px;
+    background: url("images/chanpinxilie.png") no-repeat 0 0;
+}
+.product .left{
+    height: 800px;
+    width: 590px;
+    float: left;
+
+}
+.product .left .top-left{
+    float: left;
+
+}
+.product .left .top-right{
+    float: right;
+}
+
+.product .center{
+    height: 800px;
+    width: 370px;
+    float: left;
+}
+.product .right{
+    height: 800px;
+    width: 330px;
+    float: left;
+}
+.product .markwrap:hover .mark{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #000;
+    opacity: 0.3;
+    font: bold 48px smihei;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
+.product .markwrap .mark{
+    display: none;
+}
+.product .p5{
+    position: relative;
+    width: 320px;
+    height: 292px;
+    margin:0 0 0 10px;
+}
+.product .p5 img{
+    width: 320px;
+    height: 292px;
+
+}
+.product .p5:hover .mark{
+    width: 320px;
+    height: 292px;
+    line-height: 292px;
+
+}
+.product .p4{
+    position: relative;
+    width: 249px;
+    height: 292px;
+}
+.product .p4 img{
+    width: 249px;
+    height: 292px;
+}
+.product .p4:hover .mark{
+
+    width: 249px;
+    height: 292px;
+    line-height: 292px;
+}
+.product .p1{
+    position: relative;
+    width: 590px;
+    height: 445px;
+    margin: 20px 20px 20px 0;
+}
+.product .p1 img{
+
+    width: 590px;
+    height: 445px;
+
+}
+.product .p1:hover .mark{
+    width: 590px;
+    height: 445px;
+    line-height: 445px;
+
+}
+.product .p2{
+    position: relative;
+    width: 333px;
+    height: 310px;
+    margin: 20px 0 20px 20px;
+}
+.product .p2 img{
+    width: 333px;
+    height: 310px;
+
+}
+.product .p2:hover .mark{
+    width: 333px;
+    height: 310px;
+    line-height: 310px;
+}
+.product .p3{
+    position: relative;
+    width: 322px;
+    height: 310px;
+    margin: 20px 0 20px 0;
+}
+.product .p3 img{
+    width: 322px;
+    height: 310px;
+}
+.product .p3:hover .mark{
+    width: 322px;
+    height: 310px;
+    line-height: 310px;
+}
+.product .p6{
+    position: relative;
+    width: 331px;
+    height: 444px;
+    margin: 0 0 20px 20px;
+}
+.product .p6 img{
+    width: 331px;
+    height: 444px;
+}
+.product .p6:hover .mark{
+    width: 331px;
+    height: 444px;
+    line-height: 444px;
+}
+.product .p7{
+    position: relative;
+    width: 316px;
+    height: 201px;
+    margin: 0 0 20px 0;
+}
+.product .p7 img{
+    width: 316px;
+    height: 201px;
+}
+.product .p7:hover .mark{
+    width: 316px;
+    height: 201px;
+    line-height: 201px;
+}
+.product .p8{
+    position: relative;
+    width: 332px;
+    height: 221px;
+}
+.product .p8 img{
+    width: 332px;
+    height: 221px;
+}
+.product .p8:hover .mark{
+    width: 332px;
+    height: 221px;
+    line-height: 221px;
+}
+
+.sale{
+    width: 70px;
+    height: 820px;
+    float: right;
+    margin-top: -50px;
+}
+.sale a{
+    display: inline-block;
+    width: 68px;
+    height: 68px;
+}
+.sale .wx{
+    height: 68px;
+    width: 68px;
+    background: url(images/shop-logo.png) no-repeat 0 0;
+    margin-bottom: 20px;
+}
+.sale .jd{
+     height: 68px;
+     width: 68px;
+     background: url(images/shop-logo.png) no-repeat 0 -88px;
+     margin-bottom: 20px;
+
+ }
+
+.sale .tm{
+    height: 68px;
+    width: 68px;
+    background: url(images/shop-logo.png) no-repeat 0 -173px;
+    margin-bottom: 20px;
+}
+.sale .gm{
+    height: 68px;
+    width: 68px;
+    background: url(images/shop-logo.png) no-repeat 0 -258px;
+    margin-bottom: 20px;
+}
+.sale .hd{
+    height: 68px;
+    width: 68px;
+    background: url(images/shop-logo.png) no-repeat 0 -345px;
+    margin-bottom: 20px;
+}
+.sale .dd{
+    height: 68px;
+    width: 68px;
+    background: url(images/shop-logo.png) no-repeat 0 -430px;
+
+}
+main .module-2{
+    height: 298px;
+    margin-top: 20px;
+}
+.quality{
+    float: left;
+    position: relative;
+    width: 940px;
+    height: 298px;
+    background: #e7feff url(images/naiyuanpinzhi.png) no-repeat 0 0;
+}
+.quality header{
+    position: absolute;
+    top: 59px;
+    left: 70px;
+}
+.quality header h2{
+    font: normal bold 36px SmiHei;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 3px 3px 5px rgba(0,0,0,0.3) ;
+
+}
+.quality .search{
+    position: absolute;
+    left: 350px;
+    top: 40px;
+}
+.quality .search .s1{
+    height: 40px;
+    width: 300px;
+    border: 1px solid #6d6d6d;
+}
+.quality .search .s2{
+    height: 60px;
+    width: 110px;
+    background-color: #cf102d;
+    color: #ffffff;
+    font-weight: bold;
+}
+.quality .search .zhuisu{
+    float: right;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.quality .jiagong{
+    background: url("images/naiyuan4.png") no-repeat 0 0;
+    height: 157px;
+    width: 853px;
+    margin-top: 135px;
+    margin-left: 30px;
+}
+
+/*新闻*/
+.news .content{
+    float: left;
+    margin-left: 20px;
+    height: 248px;
+    width: 282px;
+    border: 1px solid #6d6d6d;
+    padding: 25px;
+}
+.news .content li{
+    border-bottom: 1px dotted #6d6d6d;
+    margin-top: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.news .content li a{
+    color: #3e454c;
+}
+.news .content li i{
+    margin-left: 200px;
+}
+.news{
+    float: left;
+    position: relative;
+    width: 451px;
+    height: 298px;
+}
+.news header{
+    float: left;
+    height: 198px;
+    width: 117px;
+    position: absolute;
+    left: 355px;
+    top: 70px;
+
+}
+.news header h2{
+    height: 170px;
+    width: 62px;
+    background-color: #052358;
+    font: normal bold 36px SmiHei;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+    box-shadow:  3px 3px 5px rgba(0,0,0,0.75);
+    border-right: 4px solid #ffffff;
+    border-bottom: 4px solid #ffffff;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px 15px 15px 15px;
+}
+
+/*线*/
+
+
+
+/*页脚*/
+footer.top .text-left{
+    float: left;
+    width: 250px;
+    height: 145px;
+    margin: 50px 0 0 280px;
+}
+footer.top .text-center{
+    margin: 50px 0 0 50px;
+    float: left;
+    width: 170px;
+    height: 145px;
+}
+footer.top .text-right{
+    margin: 50px 0 0 50px;
+    float: left;
+    width: 250px;
+    height: 145px;
+}
+footer.top .pic-logo{
+    background: url("images/logo5.png") no-repeat 0 0;
+    width: 364px;
+    height: 56px;
+    float: left;
+    margin: 80px 0 0 80px;
+}
+footer.top a{
+    color: #000000;
+}
+/*遮罩层*/
+#mask{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;background-color: #000000;
+}
+/*登录*/
+.login-box{
+    float: right;
+}
+#login{
+    position: absolute;
+    left: 50%;/*父元素的50%*/
+    top: 50%;
+    transform: translate(-50%,-50%);/*translate移动函数，x轴：正值向右移。y轴：正值向下移*/
+    width: 390px;
+    height: 446px;
+    background-color: #ffffff;
+}
+#login header{
+    position: relative;
+    height: 46px;
+    background-color: #f7f7f7;
+    border-bottom: #F2F2F2;
+
+}
+#login header h3{
+    font-size: 18px;
+    font-weight: bold;
+    float: left;
+    margin: 20px 0 0 10px;
+}
+#login header img{
+    float: left;
+    margin: 13px 0 0 10px;
+}
+#login header i{
+    color: #cccccd;
+    float: right;
+    position: absolute;
+    right: 20px;
+    bottom: 11px;
+    cursor: pointer;
+}
+#login header i:hover{
+    color: #555758;
+}
+
+#login .content{
+    width: 390px;
+    height: 310px;
+}
+#login .content .kong{
+    width: 390px;
+    height: 24px;
+    padding: 8px 0 2px 0;
+}
+
+#login .content .massage .text{
+    float: right;
+    margin-right: 20px;
+}
+#login .content .massage .p{
+    display: inline-block;
+    width: 9px;
+    height: 15px;
+    margin-left: 240px;
+    background: url("images/buy.png") no-repeat 0 0;
+}
+.form .name{
+     border: solid 1px #6d6d6d;
+     display: block;
+     height: 22px;
+     width: 330px;
+     margin-left: 20px;
+     margin-top: 20px;
+    padding: 10px;
+ }
+.form .password{
+    border: solid 1px #6d6d6d;
+    display: block;
+    height: 22px;
+    width: 330px;
+    margin-left: 20px;
+    margin-top: 20px;
+    padding: 10px;
+}
+.form .che{
+    float: left;
+    margin: 20px 0 0 20px;
+}
+.form .t1{
+    float: left;
+    margin: 10px 0 0 0;
+
+}
+.form .t1 a{
+    color: #312F30;
+}
+.form .t2{
+    float: right;
+    margin: 10px 20px 0 0;
+}
+.form .t2 a{
+    color: #312F30;
+}
+.form .s{
+    display: block;
+    width: 350px;
+    height: 42px;
+    background-color: #0044cc;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 50px;
+
+}
+.form .zhuce{
+    float: right;
+    margin-right: 20px;
+    margin-top: 10px;
+    color: #312F30;
+}
+.footer{
+    height: 90px;
+    border-top: 1px solid #F2F2F2;
+}
+.footer p{
+    margin-left: 20px;
+}
+.footer .qq{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    margin-top: 20px;
+    margin-left: 20px;
+    background: url("images/topdsflogin_icon.gif") no-repeat 0 0;
+}
+.footer .wb{
+   display: inline-block;
+    width: 28px;
+    height: 28px;
+    margin-top: 20px;
+    margin-left: 20px;
+    background: url("images/topdsflogin_icon.gif") no-repeat 0 -28px;
+}
