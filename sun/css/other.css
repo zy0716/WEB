@@ -1,0 +1,547 @@
+
+
+
+.yun-header{
+    height: 62px;
+    background: url("../img/header-bg.png") repeat 0 0;
+    border-bottom: 0;
+    position: relative;
+    margin-bottom: 0;
+}
+.yun-header img{
+    margin-top: 10px;
+}
+.yun-header .line{
+    display: inline-block;
+    height: 62px;
+    width: 211px;
+    border-right: 2px solid #65A5EC;
+    position: absolute;
+    top: 0;
+
+}
+.yun-header .h-content{
+    display: inline-block;
+   margin-left: 900px;
+    margin-top: 20px;
+}
+.yun-header .h-content span{
+    color: #ffffff;
+    font-weight: bold;
+}
+.yun-header .h-content a{
+    color: orange;
+}
+
+
+/*侧边栏*/
+.sidebar{
+    border: 1px solid #dcdcdc;
+    border-bottom: 0;
+}
+.sidebar .black{
+    height: 30px;
+    background-color: black;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 1px;
+
+}
+.sidebar ul li a{
+    background: linear-gradient(#FFFFFF,#F8F8F8,#F4F4F4);
+    border-bottom: 1px solid #dcdcdc;
+    font-weight: bold;
+    color: #868A90;
+    position: relative;
+}
+.sidebar ul li img{
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+}
+.sidebar .kong{
+    height: 100px;
+}
+.sidebar .question-pic{
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+.sidebar .question{
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    font-weight: bold;
+
+}
+.yun-side{
+    float: left;
+    width: 224px;
+    padding: 20px;
+
+}
+.help{
+    width: 208px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.form-inline .form-control{
+     display: inline-block;
+    width: 200px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #dcdcdc;
+
+ }
+.form-group img{
+    margin-top: 5px;
+    margin-right: 10px;
+}
+.form-inline .form-group{
+    width: 210px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+/*右主栏*/
+.yun-content{
+    margin-top: 20px;
+
+}
+.panel-heading{
+    background: linear-gradient(#FFFFFF,#F8F8F8,#F4F4F4);
+    font-weight: bold;
+}
+.panel-body h2{
+    color: #868A90;
+    margin-bottom: 20px;
+}
+.btn-group{
+    margin-left:160px;
+}
+.panel{
+    height: 207px;
+}
+
+/*云主机的右边栏*/
+
+.yun-line{
+   /* margin: 10px 0 0 50px;*/
+    margin-top: 20px;
+    margin-left: 244px;
+    margin-bottom: 20px;
+
+    border-top: solid 3px #65A5EC;
+}
+.yun-line h3{
+   color: #65A5EC;
+    font-weight: bold;
+}
+.yun-line p{
+    line-height: 30px;
+    color: #666;
+    font-weight: bold;
+    font-size: 12px;
+}
+/*云主机 按钮排*/
+.anniu{
+    height: 30px;
+    margin-top: 70px;
+}
+.btn-warning{
+    display: inline-block;
+    height: 30px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.btn-group-justified{
+    display: inline-block;
+    width: 252px;
+    margin-left: 10px;
+}
+.btn-default{
+    display: inline-block;
+    height: 30px;
+    font-size: 12px;
+    font-weight: bold;
+
+}
+
+.btn-y{
+    display: inline-block;
+}
+.btn-black{
+    background-color: black;
+    display: inline-block;
+    height: 30px;
+    padding: 5px 12px 7px 12px;
+    color: #ffffff;
+
+}
+.btn-gray{
+    color: #666;
+    margin-right: 2px;
+
+}
+/*搜索框*/
+.input-group{
+    width: 200px;
+    height: 30px;
+    float: right;
+}
+.input-group input{
+ display: inline-block;
+  margin-top: 1px;
+
+}
+/*云主机 table*/
+table{
+    border: #dcdcdc 1px solid;
+    float: right;
+    width: 1104px;
+
+}
+td{
+
+    padding: 10px 20px;
+    border-bottom: 1px solid #dcdcdc;
+    text-align: center;
+    font-weight: bold;
+    font-size:12px;
+
+}
+thead td{
+    color: #65A5EC;
+    border-left: 1px solid #dcdcdc;
+    background: linear-gradient(#FFFFFF,#F8F8F8,#F4F4F4);
+
+}
+
+table .stop1{
+   padding-left: 25px;
+    background: url("../img/host-status-icon.png") no-repeat 0 -3px;
+   text-align: left;
+}
+table .stop2{
+    padding-left: 25px;
+    background: url("../img/host-status-icon.png") no-repeat 0 -43px;
+    text-align: left;
+}
+table .stop3{
+    padding-left: 25px;
+    background: url("../img/host-status-icon.png") no-repeat 0 -88px;
+}
+table .on-off1{
+    padding-left: 40px;
+    background: url("../img/host-status-icon2.png") no-repeat 0 -2px;
+    text-align: left;
+}
+table .on-off2{
+    padding-left: 40px;
+    background: url("../img/host-status-icon2.png") no-repeat 0 -43px;
+}
+tfoot .td-left{
+    text-align: left;
+}
+tfoot .td-right{
+    text-align: right;
+}
+tfoot td{
+    background-color: #F4F4F4;
+    border: 0;
+    padding: 0;
+}
+tfoot .td-right{
+    padding-top: 10px;
+}
+tfoot .td-left{
+   padding-left: 5px;
+}
+tfoot td p{
+    margin: 0;
+}
+tfoot input{
+    display: inline-block;
+    width: 50px;
+    height: 18px;
+}
+tfoot .btn-default{
+    display: inline-block;
+    height: 18px;
+   padding: 0;
+    width: 20px;
+}
+/*云主机 售后的电话*/
+.sell{
+    margin-top: 10px;
+    width: 210px;
+    border-bottom: 1px solid #dcdcdc;
+}
+.sell h4{
+    display: inline-block;
+    margin-top: 0;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 10px;
+}
+.sell img{
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+.sell p{
+    color: #65A5EC;
+    font-size: 12px;
+    margin-left: 10px;
+}
+.tel p{
+    display: inline-block;
+    margin: 10px ;
+}
+.tel img{
+    margin-bottom: 10px;
+}
+.email p{
+    display: inline-block;
+    margin: 10px ;
+}
+.email img{
+    margin-bottom: 10px;
+}
+/*个人信息*/
+.media-left .a1{
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 20px;
+    color: dodgerblue;
+}
+.media-left img{
+    margin-top: 10px;
+}
+.media-body a{
+    display: inline-block;
+    margin-bottom: 10px;
+    color: dodgerblue;
+
+}
+.media-body p em{
+    font-weight: bold;
+    color: orange;
+    font-size: 20px;
+}
+.media-body input{
+    display: inline-block;
+    height: 30px;
+    width: 82px;
+}
+
+/*所有产品*/
+.panel-2{
+    height: 300px;
+}
+.panel-2 .media-2{
+    height: 100px;
+    margin-top: 20px;
+}
+.panel-2 .media-body-2{
+    font-weight: bold;
+}
+
+/*模态框*/
+.modal input{
+ border: 1px solid #dcdcdc;
+    border-radius: 5px;
+}
+.modal-title{
+
+    font-weight: bold;
+}
+.modal .modal-content .modal-header{
+    border-bottom: 2px solid #666;
+}
+
+.modal .modal-content{
+    width: 788px;
+    padding: 0 20px;
+}
+.modal .modal-body{
+    padding-top: 0;
+}
+.host{
+    display: inline-block;
+    margin-top: 20px;
+}
+.modal .modal-content form img{
+    margin-left: 60px;
+}
+.img{
+    width: 722px;
+    height: 100px;
+    background-color: #F2F2F2;
+}
+/*表单内容*/
+.modal form #host-name{
+    width: 200px;
+    margin-left: 12px;
+    border-top: 2px solid #dcdcdc;
+    border-left: 2px solid #dcdcdc;
+    border-radius: 5px;
+}
+.modal .peizhi{
+    margin-left: 100px;
+
+}
+.form_line{
+    width: 500px;
+    border: 1px solid #dcdcdc;
+    margin: 20px 0;
+}
+.modal .an{
+    display: inline-block;
+    width: 300px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.modal label{
+    display: inline-block;
+    width: 63px;
+    text-align: right;
+}
+.modal .an .btn-default{
+    background: linear-gradient(#FAF6FE,#CFE4F9,#CCE1FC);
+}
+.modal .an .btn-default:active,
+.modal .an .btn-default.active{
+    border: 1px solid deepskyblue;
+
+}
+
+.cpu input{
+  display: inline-block;
+    width: 60px;
+}
+.cpu .range{
+    display: inline-block;
+    width: 200px;
+    margin: 10px 20px;
+}
+.cpu .s1{
+    display: inline-block;
+    margin-left: 85px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.cpu .s2{
+    display: inline-block;
+    margin-left: 145px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.cpu .t{
+    background-color: #eeeeee;
+}
+/*操作系统*/
+.modal .xitong{
+    margin-left: 100px;
+}
+.modal .xitong .ann{
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+}
+.modal .xitong .ann{
+    background: linear-gradient(#FAF6FE,#CFE4F9,#CCE1FC);
+}
+.modal .xitong .ann:active,
+.modal .xitong .ann.active{
+    border: 1px solid deepskyblue;
+}
+.xitong .ra{
+    display: inline-block;
+    margin-left: 10px;
+}
+.win{
+    width: 320px;
+    border: 1px solid #dcdcdc;
+    height: 40px;
+    margin: 10px 0 10px 75px;
+}
+.win input{
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+/*购买时长 数量*/
+.p-t{
+    width: 700px;
+    margin-left: 5px;
+    margin-top: 10PX;
+}
+.p-t .num{
+    display: inline-block;
+    width: 200px;
+}
+.p-t .num input{
+    display: inline-block;
+    width: 80px;
+}
+.p-t .times{
+    display: inline-block;
+    width: 300px;
+    margin-left: 60px;
+}
+.p-t .times input{
+    display: inline-block;
+    width: 80px;
+}
+
+/*售价*/
+.price{
+    background-color: #CFEAF8;
+    width: 200px;
+    height: 380px;
+    float: right;
+    margin-top: 10px;
+    padding: 30px;
+}
+.price h5{
+    border-bottom: 1px solid #dcdcdc;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+.price .sp1{
+    display: inline-block;
+    width: 60px;
+    text-align: right;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 12px;
+}
+.price .shu-content .sp2{
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #0088cc;
+}
+.price .shu-content{
+    border-bottom: 1px solid #dcdcdc;
+}
+.price #qian{
+   font-size: 20px;
+    color: #0088cc;
+}
+
+.modal-footer .btn-default{
+    background-color: #44AAC7;
+    color: #ffffff;
+}
+.modal-footer .btn-primary{
+    margin-right: 340px;
+    font-weight: bold;
+}
+
+
+

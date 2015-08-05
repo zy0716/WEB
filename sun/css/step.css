@@ -1,0 +1,54 @@
+#example-step.wizard>.steps>ul>li {
+    width: auto;
+}
+
+#example-step.wizard>.steps{
+    background-color: #eee;
+    height: 100px;
+}
+
+#example-step.wizard>.steps a .number{
+    position: absolute;
+    left: 50%;
+    margin-left: -15px;
+    top: 50px;
+    width: 28px;
+    height: 28px;
+    padding: 3px;
+    background-color: #666;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    line-height: 18px;
+}
+
+#example-step.wizard>.steps ul li{
+    position: relative;
+
+}
+
+#example-step.wizard>.steps .current a,
+#example-step.wizard>.steps .current a:hover,
+#example-step.wizard>.steps .current a:active {
+    background: none;
+    color: green;
+    cursor: default;
+}
+
+#example-step.wizard>.steps .current a .number,
+#example-step.wizard>.steps .current a:hover .number,
+#example-step.wizard>.steps .current a:active .number {
+    background-color: green;
+}
+
+#example-step.wizard>.steps .done a,
+#example-step.wizard>.steps .done a:hover,
+#example-step.wizard>.steps .done a:active {
+    background: none;
+    color: #666;
+}
+
+#example-step .actions{
+    padding: 10px 0 10px 260px;
+}

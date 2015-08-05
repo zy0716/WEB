@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><!--//兼容IE的   手机端-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!--响应式布局-->
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="../lib/bootsrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/jquery.steps.css">
+    <link rel="stylesheet" href="../css/step.css">
+    <link rel="stylesheet" href="../css/other.css"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="../lib/shim/html5shiv.min.js"></script>//这两个是兼容和做响应式布局的
+    <script src="lib/shim//respond.min.js"></script>
+
+    <![endif]-->
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top yun-header">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="line"><img src="../img/logo.png" alt=""/></div>
+            <div class="h-content">
+                <span>欢迎,</span><a href="#">zhangying@qq.com</a><span>登录</span>
+            </div>
+        </div>
+
+    </div>
+
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class=" sidebar yun-side">
+            <div class="black"><a href="../home.html">控制台首页</a></div>
+            <ul class="nav nav-sidebar">
+                <li><a href="">云主机<img src="../img/arrow-up.png" alt=""/></a></li>
+                <li><a href="">云硬盘<img src="../img/arrow-right.png" alt=""/></a></li>
+                <li><a href="">负载均衡<img src="../img/arrow-right.png" alt=""/></a></li>
+                <li><a href="">关系数据库<img src="../img/arrow-right.png" alt=""/></a></li>
+                <li><a href="">CDN<img src="../img/arrow-right.png" alt=""/></a></li>
+                <li><a href="">监控宝<img src="../img/arrow-right.png" alt=""/></a></li>
+                <li><a href="">DNS<img src="../img/arrow-right.png" alt=""/></a></li>
+            </ul>
+            <div class="black">个人中心</div>
+            <div class="kong"></div>
+            <div class="help">
+                <img src="../img/question.png" alt="" class="question-pic"/>
+                <div class="question">帮助中心</div>
+            </div>
+            <form class="form-inline">
+                <div class="form-group has-success has-feedback">
+                    <input type="text" class="form-control" id="inputSuccess4" aria-describedby="inputSuccess4Status">
+                    <img src="../img/search.png" class="glyphicon glyphicon-ok form-control-feedback" alt=""/>
+                </div>
+            </form>
+            <div class="sell">
+                <img src="../img/sell.png" alt=""/>
+                <h4>售后服务</h4>
+                <p>周一到周五（9:00-18:00）</p>
+            </div>
+            <div class="tel">
+                <img src="../img/tel.png" alt=""/>
+                <p>1832222222222</p>
+            </div>
+            <div class="email">
+                <img src="../img/email.png" alt=""/>
+                <p>qqcks@qq.com</p>
+            </div>
+        </div>
+
+        <div class=" yun-line">
+            <h3>云主机</h3>
+            <p>我们提供一种随时获取的弹性的能力，这种能力的体现就是主机。主机就是一台配置好了的服务器，他有您期望的硬件配置，操作系统、服务配置，通常情况下，您的请求在10秒到60秒内完成。所以你可以动态的按需使用能力</p>
+            <div class="anniu">
+                <button id="modal-btn" type="button" class="btn btn-warning" ><span class="glyphicon glyphicon-plus"></span>创建主机</button>
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group">
+                        <button type="button"  class="open_host btn btn-default"><span class="glyphicon glyphicon-play btn-gray"></span>开机</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button"  class="open_host btn btn-default"><span class="glyphicon glyphicon-stop btn-gray"></span>关机</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="open_host btn btn-default"><span class="glyphicon glyphicon-off btn-gray"></span>断电</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-repeat btn-gray"></span>重启</button>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-default btn-y">应急登录(VNC)</button>
+                <button type="button" class="btn glyphicon glyphicon-repeat btn-black"></button>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="请输入搜索内容" aria-describedby="basic-addon2">
+                    <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon2"></span>
+                </div>
+            </div>
+        </div>
+        <table class="yun-list">
+            <thead>
+                <tr>
+                    <td><input type="checkbox" id="chkAll"/></td>
+                    <td>云服务名称</td>
+                    <td>内网IP</td>
+                    <td>外网IP</td>
+                    <td>状态</td>
+                    <td>到期时间</td>
+                    <td>云防护</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ><input type="checkbox" id="item_1"/></td>
+                    <td>阳光云方案游戏云</td>
+                    <td>180.153.22.4</td>
+                    <td>180.153.22.4</td>
+                    <td>开机中...<img src="../img/opening.png"></td>
+                    <td>2013-02-23到2013-06-23</td>
+                    <td><span class="on-off1">已开启</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="item_2"/></td>
+                    <td>阳光云方案游戏云</td>
+                    <td>180.153.22.4</td>
+                    <td>180.153.22.4</td>
+                    <td><span  class="stop1">已关机</span></td>
+                    <td>2013-02-23到2013-06-23</td>
+                    <td><span class="on-off2">已关闭</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="item_3"/></td>
+                    <td>阳光云方案游戏云</td>
+                    <td>180.153.22.4</td>
+                    <td>180.153.22.4</td>
+                    <td><span  class="stop2">正常运行</span></td>
+                    <td>2013-02-23到2013-06-23</td>
+                    <td><span class="on-off1">已开启</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" id="item_4"/></td>
+                    <td>阳光云方案游戏云</td>
+                    <td></td>
+                    <td>180.153.22.4</td>
+                    <td><span  class="stop3">已停止</span></td>
+                    <td>2013-02-23到2013-06-23</td>
+                    <td><span class="on-off2">已关闭</span></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="td-left">
+                        <p>条目总数:</p>
+                    </td>
+
+                    <td colspan="6" class="td-right">
+                        <div>
+                            每页显示数:
+                            <select name="" id="">
+                                <option value="1">10</option>
+                                <option value="2">20</option>
+                                <option value="3">30</option>
+                            </select>
+                            <button type="button" class="btn btn-default glyphicon glyphicon-step-backward"></button>
+                            <button type="button" class="btn btn-default glyphicon glyphicon-triangle-left"></button>
+                            <input type="text"/>
+                            <button type="button" class="btn btn-default glyphicon glyphicon-triangle-right"></button>
+                            <button type="button" class="btn btn-default glyphicon glyphicon-step-forward"></button>
+
+                        </div>
+                    </td>
+                </tr>
+            <tr><td colspan="7" class="td-left">选中的条目数:<span id="selectedLength"></span></td></tr>
+            </tfoot>
+
+        </table>
+    </div>
+
+</div>
+
+<!--<div id="a"></div>-->
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="../lib/jquery/jquery-1.11.3.js"></script>
+<script src="../lib/jquery/jquery-1.11.3.min.js"></script>
+<script src="../lib/jquery/jquery-1.11.3.min.map"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../lib/bootsrap/dist/js/bootstrap.min.js"></script>
+<script src="../lib/other/jquery.steps.js"></script>
+
+
+
+<script>
+$(function(){
+
+    //获取节点
+    var $items =  $('table.yun-list input:checkbox:not(#chkAll)');
+    var $selectedLength =$('#selectedLength');
+    var $open_host = $('.open_host');
+    var $chkAll = $('#chkAll');
+
+    //设置默认状态
+    $selectedLength.text(0);
+    $open_host.prop('disabled',true);
+
+    $chkAll.click(function(){
+        //全选
+        $items.prop('checked',this.checked);
+
+        //当前选中数量
+        var $checkedItems = $items.filter(':checked');
+        $selectedLength.text($checkedItems.length);
+        //按钮状态
+        $open_host.prop('disabled', !$checkedItems.length);
+    });
+
+    $items.click(function(){
+        //选中的数量
+        var $checkedItems = $items.filter(':checked');
+        $selectedLength.text($checkedItems.length);
+        //是否全选
+        $chkAll.prop('checked',$checkedItems.length == $items.length);
+        //按钮状态
+        $open_host.prop('disabled', !$checkedItems.length);//!$checkedItems.length  没有长度时候禁用按钮
+    });
+
+
+    $('#modal-btn').click(function(){
+
+        //动态创建节点
+        var $formNode = $('<div>');
+        $(document.body).append($formNode);
+
+        $formNode.load('alert-host.html',function(){
+            $('#myModal').modal('toggle');
+        })
+    });
+});
+
+</script>
+</body>
+</html>

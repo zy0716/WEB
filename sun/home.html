@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><!--//兼容IE的   手机端-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!--响应式布局-->
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="lib/bootsrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/other.css"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="lib/shim/html5shiv.min.js"></script>//这两个是兼容和做响应式布局的
+    <script src="lib/shim//respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top yun-header">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="line"><img src="img/logo.png" alt=""/></div>
+                <div class="h-content">
+                    <span>欢迎,</span><a href="#">zhangying@qq.com</a><span>登录</span>
+                </div>
+            </div>
+
+        </div>
+
+    </nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 sidebar yun-side">
+            <div class="black"><a href="home.html">控制台首页</a></div>
+            <ul class="nav nav-sidebar">
+                <li><a href="view/zhuji.html">云主机<img src="img/arrow-up.png" alt=""/></a></li>
+                <li><a href="">云硬盘<img src="img/arrow-right.png" alt=""/></a></li>
+                <li><a href="">负载均衡<img src="img/arrow-right.png" alt=""/></a></li>
+                <li><a href="">关系数据库<img src="img/arrow-right.png" alt=""/></a></li>
+                <li><a href="">CDN<img src="img/arrow-right.png" alt=""/></a></li>
+                <li><a href="">监控宝<img src="img/arrow-right.png" alt=""/></a></li>
+                <li><a href="">DNS<img src="img/arrow-right.png" alt=""/></a></li>
+            </ul>
+            <div class="black">个人中心</div>
+            <div class="kong"></div>
+            <div class="help">
+                <img src="img/question.png" alt="" class="question-pic"/>
+                <div class="question">帮助中心</div>
+            </div>
+            <div class="line-f">
+                <form class="form-inline">
+                    <div class="form-group has-success has-feedback">
+                        <input type="text" class="form-control " id="inputSuccess4" aria-describedby="inputSuccess4Status">
+                        <img src="img/search.png" class="glyphicon glyphicon-ok form-control-feedback" alt=""/>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+            <div class="col-md-10 yun-content">
+                <div class="col-md-7 ">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">我的资源</div>
+                        <div class="panel-body">
+                            <h2>您还没有创建任何主机，请点击按钮创建</h2>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success btn-lg" >
+                                   <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                                <button type="button" class="btn btn-success btn-lg">创建主机</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 ">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">个人信息</div>
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="img/main-cloud.gif" alt="...">
+                                        <a href="#" class="a1">修改信息</a>
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <a href="#">xxhuxu@qq.com</a>
+                                    <p>上次登录时间：3013-12-03 14:08:08</p>
+                                    <p>现金余额：<em>0.00</em> 元</p>
+                                    <input type="button" class="btn btn-warning" value="充值"/>
+                                    <input type="button" class="btn btn-default" value="提交订单"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 ">
+                    <div class="panel panel-default panel-2">
+                        <div class="panel-heading">所有产品</div>
+                        <div class="panel-body">
+                           <div class="col-md-4">
+                               <div class="media media-2">
+                                   <div class="media-left media-left-2">
+                                       <a href="#">
+                                           <img class="media-object" src="img/icon-main1.jpg" alt="...">
+                                       </a>
+                                   </div>
+                                   <div class="media-body media-body-2">
+                                       <h4 class="media-heading">计算和网络</h4>
+                                       <a href="#">云主机、负载均衡、云防护</a>
+                                   </div>
+                               </div>
+                           </div>
+                            <div class="col-md-8 ">
+                                <div class="media media-2">
+                                    <div class="media-left media-left-2">
+                                        <a href="#">
+                                            <img class="media-object" src="img/icon-main2.jpg" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="media-body media-body-2">
+                                        <h4 class="media-heading">存储和CDN</h4>
+                                        <a href="#">云硬盘、云数据库、云内存存储、云分发CDN</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="media media-2">
+                                    <div class="media-left media-left-2">
+                                        <a href="#">
+                                            <img class="media-object" src="img/icon-main3.jpg" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="media-body media-body-2">
+                                        <h4 class="media-heading">价格计算器</h4>
+                                        <a href="#">云主机、云硬盘、云数据库、云分发CDN</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8 ">
+                                <div class="media media-2">
+                                    <div class="media-left media-left-2">
+                                        <a href="#">
+                                            <img class="media-object" src="img/icon-main4.png" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="media-body media-body-2">
+                                        <h4 class="media-heading">第三方服务</h4>
+                                        <a href="#">监控宝、DNS</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="lib/jquery/jquery-1.11.3.js"></script>
+<script src="lib/jquery/jquery-1.11.3.min.js"></script>
+<script src="lib/jquery/jquery-1.11.3.min.map"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="lib/bootsrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

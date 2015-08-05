@@ -1,0 +1,170 @@
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">创建云主机</h4>
+            </div>
+            <div class="modal-body">
+                <form id="myform" name="myform" action="">
+                    <!--<div class="img"><img src="../img/db-step1.png" alt=""/></div>-->
+                    <div id="example-step">
+                        <h3>选择配置</h3>
+                        <section>
+                            <div class="peizhi">
+                                <div class="host">
+                                    <label for="host-name">主机名称:</label><input type="text" id="host-name"/>
+                                </div>
+                                <div class="price">
+                                    <h5>当前配置</h5>
+                                    <div class="shu-content">
+                                        <div><span class="sp1">数据中心:</span><span class="sp2">华东双线</span></div>
+                                        <div><span class="sp1">CPU:</span><span class="sp2" id="scpu"></span><span class="sp2">核</span></div>
+                                        <div><span class="sp1">内存:</span><span class="sp2" id="save"></span><span class="sp2">GB</span></div>
+                                        <div><span class="sp1">硬盘:</span><span class="sp2">250GB</span></div>
+                                        <div><span class="sp1">网络:</span><span class="sp2">无网络</span></div>
+                                        <div><span class="sp1">宽带:</span><span class="sp2">0 Mbps</span></div>
+                                        <div><span class="sp1">数量:</span><span class="sp2">1台</span></div>
+                                        <div><span class="sp1">时长:</span><span class="sp2">1月</span></div>
+                                    </div>
+                                    <span class="sp1">价格：</span><span id="qian"></span>
+                                </div>
+                                <div>
+                                    <label>推荐配置:</label>
+                                    <div class="an" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="options" id="option1" autocomplete="off" checked>经济型
+                                        </label>
+                                        <label class="btn btn-default">
+                                            <input type="radio" name="options" id="option2" autocomplete="off">企业型
+                                        </label>
+                                        <label class="btn btn-default">
+                                            <input type="radio" name="options" id="option3" autocomplete="off">高配型
+                                        </label>
+                                        <label class="btn btn-default">
+                                            <input type="radio" name="options" id="option4" autocomplete="off">自定义
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="cpu">
+                                    <label>CPU:</label><input type="range" id="range" name="range" min="1" max="32" value="1" class="range"><input id="disk" type="text" class="t"/> 核<br>
+                                    <span class="s1">1核</span><span class="s2">32核</span>
+                                </div>
+                                <div class="cpu">
+                                    <label>内存:</label><input id="range2" min="2" max="128" value="2" type="range" class="range"><input id="disk2" type="text" class="t"/> GB<br>
+                                    <span class="s1">2GB</span><span class="s2">128GB</span>
+                                </div>
+                                <div class="cpu">
+                                    <label>数据盘:</label><input id="range3" min="0" max="4048" value="0" type="range" class="range"><input id="disk3" type="text" class="t"/> GB<br>
+                                    <span class="s1">0GB</span><span class="s2">2T</span>
+                                </div>
+                            </div>
+                            <div class="form_line"></div>
+                            <div class="xitong">
+                                <div>
+                                    <label>操作系统:</label>
+                                    <div  data-toggle="buttons" class="ra">
+                                        <label class="btn btn-default active ann">
+                                            <input type="radio" name="options" id="option5" autocomplete="off" checked>windows
+                                        </label>
+                                        <label class="btn btn-default ann">
+                                            <input type="radio" name="options" id="option6" autocomplete="off">Linux
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="win">
+                                    <input type="radio"/>windows2008
+                                </div>
+                            </div>
+                            <div class="p-t">
+                                <div class="num">
+                                    <label for="num">购买数量:</label>
+                                    <input type="text" list="b-num" id="num" value="1"/>
+                                    <datalist id="b-num">
+                                        <option value="1">
+                                        <option value="2">
+                                        <option value="3">
+                                    </datalist>
+                                </div>
+                                <div class="times">
+                                    <label for="time">购买时长:</label>
+                                    <input type="text" list="b-time" id="time" value="按月"/>
+                                    <datalist id="b-time">
+                                        <option value="按月">
+                                        <option value="按年">
+                                    </datalist>
+                                    <input type="text" list="b-time2" value="1"/>
+                                    <datalist id="b-time2">
+                                        <option value="1">
+                                        <option value="2">
+                                    </datalist>
+                                </div>
+                            </div>
+                        </section>
+
+                        <h3>选择网络</h3>
+                        <section>
+                            <p>2.Wonderful transition effects.</p>
+                        </section>
+                        <h3>基本设置</h3>
+                        <section>
+                            <p>3.The next and previous buttons help you to navigate through your content.</p>
+                        </section>
+                        <h3>支付</h3>
+                        <section>
+                            <p>3.The next and previous buttons help you to navigate through your content.</p>
+                        </section>
+
+                    </div>
+                </form>
+            </div>
+
+          <!--  <div class="modal-footer">
+                <button type="button" form="myform"  class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" form="myform" class="btn btn-primary">下一步</button>
+
+            </div>-->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+
+
+    $(function(){
+
+        //默认状态值
+        $('#disk').val($('#range').val());
+        $('#disk2').val($('#range2').val());
+        $('#disk3').val($('#range3').val());
+        $('#qian').text($('#range').val());
+        $('#scpu').text($('#range').val());
+        $('#save').text($('#range2').val());
+
+        $('#myform').bind('input',function(){
+            $('#disk').val($('#range').val());
+            $('#disk2').val($('#range2').val());
+            $('#disk3').val($('#range3').val());
+            $('#qian').text($('#range').val()*2);
+            $('#scpu').text($('#range').val());
+            $('#save').text($('#range2').val());
+        });
+
+
+        $("#example-step").steps({
+            headerTag: "h3",
+            bodyTag: "section",
+            autoFocus: false
+        });
+
+
+
+    })
+</script>
