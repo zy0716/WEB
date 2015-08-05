@@ -1,0 +1,101 @@
+
+
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font: inherit;
+}
+body{
+    background-color: white;
+    font: 14px 微软雅黑,黑体, Verdana,sans-serif;
+    color: #333333;
+    border-top: 8px solid #006f47;
+}
+ul,ol{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+}
+/*头部*/
+.wrap{
+    width: 960px;
+    margin: 0 auto;
+}
+.top-header{
+    height: 120px;
+}
+.starbucks-logo{
+    float: left;
+    width: 84px;
+    height: 84px;
+    padding-top: 20px;
+}
+.top-menu{
+    float: left;
+    margin-top: 80px;
+    margin-left: 30px;
+}
+.top-menu ul li{
+    /*display: inline-block;*/
+    float: left;
+    background-color: #efe5d0;
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+.top-menu ul li.select{
+    background-color: #c8b99c;
+}
+.top-menu ul li a{
+    color: #006f47;
+    font-weight: bold;
+}
+/*主内容*/
+.main{
+    width: 900px;
+
+    margin-top: 50px;
+    background: url("images/background.gif") 0 0 repeat;
+}
+.h h2{
+    color: #006f47;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px auto;
+    padding-top: 10px;
+    font-size: 1.2em;
+}
+.form{
+    display: table;
+    margin:0 auto;
+}
+.row{
+    display: table-row;
+
+}
+.column{
+    display: table-cell;
+    text-align: left;
+    vertical-align: top;
+    padding: 10px;
+
+}
+.column p{
+    text-align: right;
+
+
+}
+.column textarea{
+    resize: none;
+}
+/*页脚*/
+.page-footer{
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #675c47;
+    text-align: center;
+    font-size: 98%;
+    color: #efe5d0;
+    clear: both;
+}
