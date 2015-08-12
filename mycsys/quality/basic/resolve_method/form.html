@@ -1,0 +1,20 @@
+
+
+
+<div class="wy-centerbox">
+    <form id="fm" method="post" action="quality/basic/resolve_method/save">
+        <input type="hidden" name="id" >
+
+        <table class="wy-form-table">
+            <tr>
+                <td class="table-title">名称：</td>
+                <td><input name="name" type="text" class="textinput easyui-validatebox" required="true" /></td>
+            </tr>
+        </table>
+
+        <div style="padding:5px 0;text-align:center;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-save" onclick="saveItem($('#fm'))">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelItem()">取消</a>
+        </div>
+    </form>
+</div>

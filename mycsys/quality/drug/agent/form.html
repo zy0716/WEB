@@ -1,0 +1,356 @@
+
+
+
+
+<div class="wy-centerbox">
+    <form id="fm" name="fm" method="post" action="quality/drug/agent/save">
+        <input type="hidden" name="id" >
+        <div id="tb" class="easyui-tabs">
+            <script type="text/javascript" src="js/pinyin.js"></script>
+            <script type="text/javascript">
+
+                function queryPinyin(fieldName){
+
+                    $('#searchKey').combogrid('clear');
+
+                    //var name = $.trim($('#' + fieldName).combogrid('getValue'));
+                    var name = $.trim($('#' + fieldName).val());
+                    var searchKey = $.trim($('#searchKey').val());
+
+                    if(name == '') {
+                        return;
+                    }
+                    if(searchKey != '') {
+                        return;//如果已定义则不需要自动生成
+                    }
+                    var arrRslt = makePy(name);
+
+
+                    if(arrRslt.length >= 1){
+
+                        var data = [];
+                        $.each(arrRslt, function(i,n){
+                            item = {id: n, name: n};
+                            data.push(item);
+                        });
+
+                        $('#searchKey').combogrid({
+                            idField: 'id',
+                            textField: 'name',
+                            data:  data,
+                            columns:[[
+                                {field:'name',title:'查询关键字'}
+                            ]]
+                        });
+
+                        $('#searchKey').combogrid('setValue',data[0].name);
+                        $('#searchKey').combogrid('showPanel');
+
+                    }
+                }
+            </script>
+            <div title="基本信息" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">通用名称：</td>
+                        <td>
+                            <input id="genericName" name="genericName" type="text" class="textinput" required="true" onchange="queryPinyin('genericName');"/>
+                            <a id="selectDrug" href="javascript:void(0)" class="easyui-linkbutton" onclick="selectExistDrug()">选择已有药品</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table-title">查询关键字：</td>
+                        <td><input id="searchKey" name="searchKey" class="easyui-combogrid" /></td>
+                    </tr>
+                    <tr>
+                        <td>商品名称：</td>
+                        <td><input name="productName" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>剂型：</td>
+                        <td><input id="dosageForm" name="dosageForm" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td>规格：</td>
+                        <td><input name="specification" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>生产厂商：</td>
+                        <td><input name="manufacturer" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>批准文号：</td>
+                        <td><input name="approvalNumber" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>药品范围：</td>
+                        <td><input id="drugRang" name="drugRang" type="text" /></td>
+                    </tr>
+
+                    <tr>
+                        <td>储存条件：</td>
+                        <td><input name="storageCondition" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>药品类别：</td>
+                        <td>
+                            <input id="drugCategory1" name="drugCategory" type="radio" checked="checked" value="非处方药" />非处方药
+                            <input id="drugCategory2" name="drugCategory" type="radio" value="处方药" />处方药
+                            <input id="drugCategory3" name="drugCategory" type="radio" value="非药品" />非药品
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>是否拆零？</td>
+                        <td>
+                            <input id="openStock1" name="openStock" type="radio" value="否" checked="checked" />否
+                            <input id="openStock2" name="openStock" type="radio" value="是" />是
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>拆零规格：</td>
+                        <td>
+                            <input id="splitSpecifications" name="splitSpecifications" type="text" class="textinput easyui-validatebox" required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>管制药品？</td>
+                        <td>
+                            <input id="controlledDrug1" name="controlledDrug" type="radio" value="否" checked="checked" />否
+                            <input id="controlledDrug2" name="controlledDrug" type="radio" value="是" />是
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>专门管制类别：</td>
+                        <td><input id="controlledCategory" name="controlledCategory" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td>限制销售数量：</td>
+                        <td>
+                            <input id="countLimit" name="countLimit" type="text" class="textinput easyui-numberbox" required="true"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>中药饮片产地：</td>
+                        <td><input name="chineseMedicineArea" type="text" class="textinput" /></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div title="进口药品(医药产品)注册证" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">证件号</td>
+                        <td><input name="drugInfoImportDrugLicenses.number" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>有效期</td>
+                        <td><input id="drugInfoImportDrugLicensesValidityDate" name="drugInfoImportDrugLicenses.validityDate" type="text" class="easyui-datebox" editable="false" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div title="进口药品通关单" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">证件号</td>
+                        <td><input name="drugInfoDrugImportNote.number" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>有效期</td>
+                        <td><input id="drugInfoDrugImportNoteValidityDate" name="drugInfoDrugImportNote.validityDate" type="text" class="easyui-datebox" editable="false" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div title="进口药品检验报告书" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">证件号</td>
+                        <td><input name="drugInfoImportDrugCheck.number" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>有效期</td>
+                        <td><input id="drugInfoImportDrugCheckValidityDate" name="drugInfoImportDrugCheck.validityDate" type="text" class="easyui-datebox" editable="false" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div title="生物制品签发证明文件" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">证件号</td>
+                        <td><input name="drugInfoBiologicalCertification.number" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>有效期</td>
+                        <td><input id="drugInfoBiologicalCertificationValidityDate" name="drugInfoBiologicalCertification.validityDate" type="text" class="easyui-datebox" editable="false" editable="false" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="padding:5px 0;text-align:center;">
+            <a id="saveBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-save" onclick="saveItem($('#fm'))">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelItem()">取消</a>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    function selectExistDrug(){
+        $('#genericName').combogrid({
+            required: true,
+            delay: 500,
+            panelWidth:690,
+            url: 'quality/drug/agent/list_drug_json_by_name',
+            idField:'genericName',
+            textField:'genericName',
+            mode:'remote',
+            columns:[[
+                {field:'genericName',title:'通用名称'},
+                {field:'productName',title:'商品名称'},
+                {field:'specification',title:'规格'},
+                {field:'manufacturer',title:'生产厂商'}
+            ]],
+            onSelect:function(rowIndex, rowData){
+                $('#searchKey').combogrid('setValue', '');
+                $('#searchKey').combogrid('setValue', rowData.searchKey);
+
+                fm.productName.value = '';
+                fm.productName.value = rowData.productName;
+
+                $('#dosageForm').combogrid('setValue','');
+                $('#dosageForm').combogrid('setValue',rowData.dosageForm);
+
+                fm.specification.value = '';
+                fm.specification.value = rowData.specification;
+
+                fm.manufacturer.value = '';
+                fm.manufacturer.value = rowData.manufacturer;
+
+                fm.approvalNumber.value = '';
+                fm.approvalNumber.value = rowData.approvalNumber;
+
+                $('#drugRang').combogrid('setValue','');
+                $('#drugRang').combogrid('setValue',rowData.drugRang);
+
+                fm.storageCondition.value = '';
+                fm.storageCondition.value = rowData.storageCondition;
+
+                if(rowData.drugCategory == '非处方药'){
+                    document.getElementById('drugCategory1').checked = true;
+                }else if(rowData.drugCategory == '处方药'){
+                    document.getElementById('drugCategory2').checked = true;
+                }else if(rowData.drugCategory == '非药品'){
+                    document.getElementById('drugCategory3').checked = true;
+                }
+
+                if(rowData.openStock == '否'){
+                    document.getElementById('openStock1').checked = true;
+
+                    $('#splitSpecifications').parent().parent().hide();
+                    $('#splitSpecifications').validatebox('disableValidation');//禁用验证
+
+                    $('#splitSpecifications').val('');
+                }else if(rowData.openStock == '是'){
+                    document.getElementById('openStock2').checked = true;
+
+                    $('#splitSpecifications').parent().parent().show();
+                    $('#splitSpecifications').validatebox('enableValidation');//启用用验证
+
+                    $('#splitSpecifications').val(rowData.splitSpecifications);
+                }
+
+                if(rowData.controlledDrug == '否'){
+                    document.getElementById('controlledDrug1').checked = true;
+
+                    $('#controlledCategory').parent().parent().hide();
+                    $('#controlledCategory').combogrid('disableValidation');//禁用验证
+
+                    $('#countLimit').parent().parent().hide();
+                    $('#countLimit').numberbox('disableValidation');//禁用验证
+
+                    $('#controlledCategory').combogrid('setValue', '');
+                    $('#countLimit').val('');
+
+                }else if(rowData.controlledDrug == '是'){
+                    document.getElementById('controlledDrug2').checked = true;
+
+                    $('#controlledCategory').parent().parent().show();
+                    $('#controlledCategory').combogrid('enableValidation');//启用验证
+
+                    $('#countLimit').parent().parent().show();
+                    $('#countLimit').numberbox('enableValidation');//启用用验证
+
+                    $('#controlledCategory').combogrid('setValue', rowData.controlledCategory);
+                    $('#countLimit').val(rowData.countLimit);
+                }
+
+                fm.chineseMedicineArea.value = '';
+                fm.chineseMedicineArea.value = rowData.chineseMedicineArea;
+
+                //console.log(rowData.drugInfoImportDrugLicenses.validityDate);
+
+                fm['drugInfoImportDrugLicenses.number'].value = '';
+                $('#drugInfoImportDrugLicensesValidityDate').datebox('setValue', '');
+                fm['drugInfoImportDrugLicenses.number'].value = rowData.drugInfoImportDrugLicenses.number;
+                $('#drugInfoImportDrugLicensesValidityDate').datebox('setValue', rowData.drugInfoImportDrugLicenses.validityDate);
+
+                fm['drugInfoDrugImportNote.number'].value = '';
+                $('#drugInfoDrugImportNoteValidityDate').datebox('setValue', '');
+                fm['drugInfoDrugImportNote.number'].value = rowData.drugInfoDrugImportNote.number;
+                $('#drugInfoDrugImportNoteValidityDate').datebox('setValue', rowData.drugInfoDrugImportNote.validityDate);
+
+                fm['drugInfoImportDrugCheck.number'].value = '';
+                $('#drugInfoImportDrugCheckValidityDate').datebox('setValue', '');
+                fm['drugInfoImportDrugCheck.number'].value = rowData.drugInfoImportDrugCheck.number;
+                $('#drugInfoImportDrugCheckValidityDate').datebox('setValue', rowData.drugInfoImportDrugCheck.validityDate);
+
+                fm['drugInfoBiologicalCertification.number'].value = '';
+                $('#drugInfoBiologicalCertificationValidityDate').datebox('setValue', '');
+                fm['drugInfoBiologicalCertification.number'].value = rowData.drugInfoBiologicalCertification.number;
+                $('#drugInfoBiologicalCertificationValidityDate').datebox('setValue', rowData.drugInfoBiologicalCertification.validityDate);
+
+            }
+        });
+    }
+
+
+    //剂型
+    $('#dosageForm').combogrid({
+        required: true,
+        delay: 500,
+        url: 'quality/basic/dosage_form/find_all_dosageform_json',
+        idField:'name',
+        textField:'name',
+        mode:'remote',
+        columns:[[
+            {field:'name',title:'剂型名称'}
+        ]]
+    });
+
+
+    //初始化药品范围下拉列表
+    $('#drugRang').combogrid({
+        required: true,
+        editable: false,
+        delay: 500,
+        url: 'quality/basic/trading_range/find_tradingrange_by_vendor_json?vendorId=12',
+        idField:'name',
+        textField:'name',
+        mode:'remote',
+        columns:[[
+            {field:'name',title:'药品范围'}
+        ]]
+    });
+
+    $('#controlledCategory').combogrid({
+        required: true,
+        url:'quality/basic/controlled/find_all_controlled_json',
+        idField:'name',
+        textField:'name',
+        mode:'remote',
+        columns:[[
+            {field:'name',title:'专门管制类别'}
+        ]]
+    });
+
+</script>

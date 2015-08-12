@@ -1,0 +1,57 @@
+
+
+
+
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="数据列表" iconCls="wy-icon-table" border="false" >
+        <div class="wy-centerbox">
+
+            <!-- 打印区域 -->
+            <!-- <div id="myPrintArea" class="myPrintArea"> -->
+
+            <!-- 列表开始 -->
+            <table id="dg" url="sale/record/split/itemlist_json" >
+                <thead>
+                <tr>
+                    <th field="saleDate" halign="center" >销售时间</th>
+                    <th field="salesperson" halign="center" >销售员</th>
+                    <th field="scode" halign="center" >单号</th>
+                    <th field="genericName" halign="center" >通用名称</th>
+                    <th field="dosageForm" halign="center" >剂型</th>
+                    <th field="specification" halign="center" >规格</th>
+                    <th field="lotnumber" halign="center" >批号</th>
+                    <th field="manufacturer" halign="center" >生产厂商</th>
+                    <th field="periodOfValidity" halign="center" >有效期至</th>
+                    <th field="retailPriceString" halign="center" align="right" >零售价(元)</th>
+                    <th field="realPriceString" halign="center" align="right"  >实际售价(元)</th>
+                    <th field="saleCountSplitSpecificationsString" halign="center" align="right" >购买数量</th>
+                    <th field="unitPriceString" halign="center" align="right" >金额(元)</th>
+                    <th field="splitPeople" halign="center" align="center" >分拆员</th>
+                    <th field="splitTime" halign="center" align="center" >分拆时间</th>
+                    <th field="checkPeople" halign="center" align="center" >复核员</th>
+                </tr>
+                </thead>
+            </table>
+            <!-- 列表结束 -->
+
+            <!-- </div> -->
+            <!-- 打印区域结束 -->
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $('#dg').datagrid({
+        method:'get',
+        rownumbers: true,
+        pagination: true,
+        singleSelect:false,
+        toolbar: '#toolbar',
+        pageSize: 20
+    });
+
+
+</script>

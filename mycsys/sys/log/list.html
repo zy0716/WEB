@@ -1,0 +1,173 @@
+
+
+
+<!-- <div id="toolbar">
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="destroyItems('sys/log/operation/deleteitems')">删除</a>
+</div> -->
+
+
+<div id="toolbar">
+    <table class="wy-form-table wy-search-table">
+
+        <tr>
+            <td rowspan="4" width="48"><img src="images/Search-11.png"></td>
+            <td>操作日期：</td>
+            <td>
+                <input id="date_begin" type="text" class="easyui-datebox" editable="false"> -
+                <input id="date_end" type="text" class="easyui-datebox" editable="false">
+            </td>
+            <td rowspan="4">
+                <a id="searchOrder" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="searchList()">查询</a>
+                <a id="clearBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="clearForm()">清空</a>
+            </td>
+        </tr>
+        <tr>
+            <td>模块名称：</td>
+            <td>
+                <input id="select_module" style="width:134px;"> -
+                <input id="select_submodule" style="width:200px;">
+            </td>
+        </tr>
+        <tr>
+            <td>操作类型：</td>
+            <td>
+                <select id="select_type" class="easyui-combobox" name="select_module" style="width:134px;">
+                    <option value=""></option>
+                    <option value="增加">增加</option>
+                    <option value="删除">删除</option>
+                    <option value="修改">修改</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td width="160">操作人：</td>
+            <td  width="380">
+                <input id="select_userName"  class="textinput" >
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="数据列表" iconCls="wy-icon-table" border="false" >
+        <!-- <div class="wy-centerbox"> -->
+        <!-- 列表开始 -->
+        <table id="dg"  url="quality/vendor/agent/listjson.json" >
+            <thead>
+            <tr>
+                <!-- <th data-options="field:'id',checkbox:true"></th> -->
+                <th field="type" halign="center">操作类型</th>
+                <th field="title" halign="center">数据记录</th>
+                <th field="userName" halign="center">操作人</th>
+                <th field="operateTime" halign="center">操作时间</th>
+                <th field="module" halign="center">模块名称</th>
+                <th field="submodule" halign="center">子模块名称</th>
+                <th field="field" halign="center">修改字段</th>
+                <th field="oldValue" halign="center" >原值</th>
+                <th field="newValue" halign="center">新值</th>
+            </tr>
+            </thead>
+        </table>
+        <!-- 列表结束 -->
+        <!-- </div> -->
+    </div>
+    <!-- <div region="east" style="width:690px;" split="true" border="false" collapsed="true"></div> -->
+</div>
+
+<script type="text/javascript">
+
+    $('#dg').datagrid({
+        rownumbers: true,
+        pagination: true,
+        singleSelect:false,
+        striped: true,
+        toolbar: '#toolbar',
+        pageSize: 20
+    });
+
+
+    //数据量大的时候这种方式的效率会越来越低
+    /* $('#select_module').combobox({
+     url:'sys/log/operation/list_all_module_json',
+     valueField:'module',
+     textField:'module' ,
+     onSelect: function(rec){
+     //url中文乱码，需要设置tomcat配置文件的编码方式
+     var url = 'sys/log/operation/list_submodule_json?module='+rec.module;
+     $('#select_submodule').combobox({url:url});
+     }
+     });
+
+     $('#select_submodule').combobox({
+     valueField:'submodule',
+     textField:'submodule'
+     }); */
+    var data = [{
+        "value":"",
+        "selected":true
+    },{
+        "value":"供货单位",
+        "submodule":[{"value":""},{"value":"基本信息"},{"value":"药品经营许可证"},{"value":"药品生产许可证"},
+            {"value":"营业执照"},{"value":"GSP证书"},{"value":"GMP证书"},{"value":"开户信息"},
+            {"value":"税务登记证"},{"value":"组织机构代码证"},{"value":"质量保证协议"}]
+    },{
+        "value":"销售人员" ,
+        "submodule":[{"value":""},{"value":"基本信息"},{"value":"销售人员身份证"},{"value":"授权书"}]
+    },{
+        "value":"药品档案" ,
+        "submodule":[{"value":""},{"value":"基本信息"},{"value":"药品档案"},{"value":"注册批件"},
+            {"value":"再注册批件"},{"value":"补充申请批件"},{"value":"进口药品（医药产品）注册证"},
+            {"value":"进口药品通关单"},{"value":"进口药品检验报告书"},{"value":"生物制品签发证明文件"}]
+    }];
+
+    $('#select_module').combobox({
+        valueField:'value',
+        textField:'value' ,
+        data:data,
+        onSelect: function(rec){
+            var subdata = rec.submodule;
+            $('#select_submodule').combobox({data:subdata});
+        }
+    });
+
+    $('#select_submodule').combobox({
+        valueField:'value',
+        textField:'value'
+    });
+
+    function showFormValue(data){
+        //$('#fm')[0].id.value = data.id;
+        //$('#fm')[0].name.value = data.name;
+        $('#fm').form('load',data);
+    }
+
+    function searchList(){
+
+        var bb = $('#date_begin').datebox('getValue');
+        var ee = $('#date_end').datebox('getValue');
+        var module = $('#select_module').combobox('getValue');
+        var submodule = $('#select_submodule').combobox('getValue');
+        var type = $('#select_type').combobox('getValue');
+        var userName = $('#select_userName').val();
+        var params = {
+            beginDate:bb,
+            endDate:ee,
+            module:module,
+            submodule: submodule,
+            type:type,
+            userName:userName
+        };
+
+        $('#dg').datagrid('load',params);
+    }
+
+    function clearForm(){
+        $('#date_begin').datebox('setValue','');
+        $('#date_end').datebox('setValue','');
+        $('#select_module').combobox('setValue','');
+        $('#select_submodule').combobox('setValue','');
+        $('#select_type').combobox('setValue','');
+        $('#select_userName').val('');
+    }
+
+</script>

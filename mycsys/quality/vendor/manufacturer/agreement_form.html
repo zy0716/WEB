@@ -1,0 +1,27 @@
+
+
+
+<div class="wy-centerbox">
+    <form id="agreement_fm" method="post" action="quality/vendor/agent/agreement_save.json">
+        <input type="hidden" name="id" >
+        <input type="hidden" name="name" />
+        <table class="wy-form-table">
+            <tr>
+                <td class="table-title">企业名称：</td>
+                <td><span id="name"></span></td>
+            </tr>
+            <tr>
+                <td>签订日期：</td>
+                <td><input name="agreement.signingDate" type="text" class="easyui-datebox" editable="false" /></td>
+            </tr>
+            <tr>
+                <td>有效期至：</td>
+                <td><input name="agreement.validityDate" type="text" class="easyui-datebox" editable="false" required="true"/></td>
+            </tr>
+        </table>
+        <div style="padding:5px 0;text-align:center;">
+            <a id="saveBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-save" onclick="saveItem($('#agreement_fm'))">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelItem()">取消</a>
+        </div>
+    </form>
+</div>

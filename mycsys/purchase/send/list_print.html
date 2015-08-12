@@ -1,0 +1,177 @@
+
+
+
+<div id="toolbar">
+    <table class="wy-form-table wy-search-table">
+
+        <tr>
+            <td rowspan="4" width="48"><img src="images/Search-11.png"></td>
+            <td>采购起止日期：</td>
+            <td>
+                <input id="date_begin" type="text" class="easyui-datebox" editable="false"> -
+                <input id="date_end" type="text" class="easyui-datebox" editable="false">
+            </td>
+            <td rowspan="4">
+                <a id="searchOrder" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="searchOrderList()">查询</a>
+                <a id="clearBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="clearForm()">清空</a>
+                <a id="searchOrderPrint" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-print" onclick="printOrderList()">打印</a>
+            </td>
+        </tr>
+        <tr>
+            <td>请输入供货单位：</td>
+            <td><input id="select_vendor" class="textinput"></td>
+        </tr>
+        <tr>
+            <td>请输入生产厂商：</td>
+            <td><input id="select_manufacturer" class="textinput"></td>
+        </tr>
+        <tr>
+            <td width="160">请输入药品通用名称：</td>
+            <td  width="380"><input id="select_drug"  class="textinput"></td>
+        </tr>
+    </table>
+</div>
+
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="数据查询" iconCls="wy-icon-table" border="false" >
+        <!-- <div class="wy-centerbox"> -->
+        <!-- 列表开始 -->
+        <!-- <div id="list_div"> -->
+        <table id="dg"   >
+
+            <thead>
+            <tr>
+                <th colspan="5">采购信息</th>
+                <th colspan="13">药品信息</th>
+            </tr>
+            <tr>
+                <!-- 采购信息 -->
+                <th field="priceString" halign="center" align="right">单价(元)</th>
+                <th field="countSplitSpecificationsString" halign="center" align="right">数量</th>
+                <th field="totalPriceString" halign="center" align="right">金额(元)</th>
+                <th field="purchaseDate" halign="center">采购日期</th>
+                <th field="buyer" halign="center">采购员</th>
+
+                <!-- 药品信息 -->
+                <th field="genericName" halign="center">通用名称</th>
+                <th field="productName" halign="center">商品名称</th>
+                <th field="dosageForm" halign="center">剂型</th>
+                <th field="specification" halign="center">规格</th>
+                <th field="manufacturer" halign="center">生产厂商</th>
+                <th field="vendor" halign="center">供货单位</th>
+                <th field="approvalNumber" halign="center">批准文号</th>
+                <th field="drugRang" halign="center">药品范围</th>
+                <th field="storageCondition" halign="center">储存条件</th>
+                <th field="drugCategory" halign="center">药品类别</th>
+                <th field="openStockString" halign="center">是否拆零(拆零规格)</th>
+                <th field="controlledDrugString" halign="center">管制药品(管制类别|管制数量)</th>
+                <th field="chineseMedicineArea" halign="center">中药饮片产地</th>
+            </tr>
+            </thead>
+        </table>
+        <!-- </div> -->
+        <!-- 列表结束 -->
+
+
+        <!-- </div> -->
+    </div>
+    <!-- <div region="east" style="width:690px;" split="true" border="false" collapsed="true"></div> -->
+</div>
+
+<!-- 打印列表开始 -->
+<div id="print_div" style="display:none;">
+    <table id="print_dg" >
+        <thead>
+        <tr>
+            <th field="genericName" halign="center">通用名称</th>
+            <th field="dosageForm" width="60px" halign="center">剂型</th>
+            <th field="specification" halign="center">规格</th>
+            <th field="manufacturer" halign="center">生产厂商</th>
+            <th field="vendor" halign="center">供货单位</th>
+            <th field="priceString" halign="center" align="right">单价</th>
+            <th field="countSplitSpecificationsString" halign="center" align="right">数量</th>
+            <th field="totalPriceString" halign="center" align="right">金额(元)</th>
+            <th field="purchaseDate" halign="center">采购日期</th>
+            <th field="chineseMedicineArea" width="100px"  halign="center">中药饮片产地</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<!-- 打印列表结束 -->
+
+<script type="text/javascript">
+
+    $('#dg').datagrid({toolbar: '#toolbar',rownumbers: true, fit:true, striped: true});
+    $('#print_dg').datagrid({rownumbers: true});
+
+
+    function sendRowformater(value,row,index){
+
+        if(value){
+            return '<lable style="color:green;">已发送</label>';
+        }else{
+            return '<lable style="color:red;">未发送</label>';
+        }
+    }
+
+    function searchOrderList(){
+
+        var bb = $('#date_begin').datebox('getValue');
+        var ee = $('#date_end').datebox('getValue');
+        var vendor = $('#select_vendor').val();
+        var drug = $('#select_drug').val();
+        var manufacturer = $('#select_manufacturer').val();
+        var url = 'purchase/send/listjson_print';
+        var params = {
+            beginDate:bb,
+            endDate:ee,
+            vendor:vendor,
+            drug:drug,
+            manufacturer:manufacturer
+        };
+
+        $('#dg').datagrid({
+            url: url,
+            rownumbers: true,
+            pagination: false,
+            showFooter: true,
+            queryParams: params
+        });
+        $('#print_dg').datagrid({
+            url: url,
+            rownumbers: true,
+            pagination: false,
+            showFooter: true,
+            queryParams: params
+        });
+
+    }
+
+
+    //一直隐藏的datagrid，用于打印
+    function printOrderList(){
+
+        var bb = $('#date_begin').datebox('getValue');
+        var ee = $('#date_end').datebox('getValue');
+
+        var printTitle = '';
+        if(bb == ee){
+            printTitle = bb + ' 采购记录';
+        }else{
+            printTitle = bb + ' 至 ' + ee + ' 采购记录';
+        }
+
+        CreateDataGridPage($('#print_dg'), printTitle);
+
+    }
+
+
+    function clearForm(){
+        $('#date_begin').datebox('setValue','');
+        $('#date_end').datebox('setValue','');
+        $('#select_vendor').val('');
+        $('#select_drug').val('');
+        $('#select_manufacturer').val('');
+    }
+
+</script>

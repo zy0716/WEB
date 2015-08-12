@@ -1,0 +1,34 @@
+
+
+
+<div class="wy-centerbox">
+    <form id="auth_fm" method="post" action="sys/user/update_auth">
+        <input type="hidden" name="id" >
+        <div id="tb" class="easyui-tabs">
+            <div title="基本信息" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">用户名：</td>
+                        <td><span id="username"></span></td>
+                    </tr>
+                    <tr>
+                        <td>权限：</td>
+                        <td>
+                            <!-- <input name="authorities" type="checkbox" value="ROLE_注册用户" />注册用户<br> -->
+                            <input name="authorities" type="checkbox" value="ROLE_系统管理" />系统管理<br>
+                            <input name="authorities" type="checkbox" value="ROLE_质量管理" />质量管理<br>
+                            <input name="authorities" type="checkbox" value="ROLE_采购管理" />采购管理<br>
+                            <input name="authorities" type="checkbox" value="ROLE_验收管理" />验收管理<br>
+                            <input name="authorities" type="checkbox" value="ROLE_养护管理" />养护管理<br>
+                            <input name="authorities" type="checkbox" value="ROLE_销售管理" />销售管理
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="padding:5px 0;text-align:center;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-save" onclick="saveItem($('#auth_fm'))">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelItem()">取消</a>
+        </div>
+    </form>
+</div>

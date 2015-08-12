@@ -1,0 +1,41 @@
+
+
+
+
+<div id="ly"  class="easyui-layout" fit="true" border="false">
+    <div region="center" title="数据列表" iconCls="wy-icon-table" border="false" >
+        <div class="wy-centerbox">
+            <!-- 列表开始 -->
+            <table id="dg" url="maintain/check/record/plan_list_json">
+                <thead>
+                <tr>
+                    <th field="edit" formatter="rowformater" halign="center" align="center" >查看记录列表</th>
+                    <th field="genarateDate" halign="center">记录生成日期</th>
+                </tr>
+                </thead>
+            </table>
+            <!-- 列表结束 -->
+        </div>
+    </div>
+    <!-- <div region="east" style="width:690px;" split="true" border="false" collapsed="true"></div> -->
+</div>
+
+<script type="text/javascript">
+
+    $('#dg').datagrid({
+        method:'get',
+        rownumbers: true,
+        pagination: true,
+        singleSelect:false,
+        toolbar: '#toolbar',
+        pageSize: 20
+    });
+
+
+
+    function rowformater(value,row,index){
+
+        var edit = '<span title="查看记录列表" class="tablegoColumn" onclick="open1(\'maintain/check/record/itemlist?planId='+row.id+'&planDate='+row.genarateDate+'\', \'查看记录列表：记录日期-'+row.genarateDate+'\')" ></span>';
+        return edit;
+    }
+</script>

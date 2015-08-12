@@ -1,0 +1,204 @@
+
+
+
+
+<div id="toolbar">
+    <form name="searchform">
+        <table class="wy-form-table wy-search-table">
+
+            <tr>
+                <td rowspan="5" width="48"><img src="images/Search-11.png"></td>
+                <td>销售起止日期：</td>
+                <td>
+                    <input id="date_begin" type="text" class="easyui-datebox" editable="false"> -
+                    <input id="date_end" type="text" class="easyui-datebox" editable="false">
+                </td>
+                <td rowspan="5">
+                    <a id="searchOrder" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="searchOrderList()">查询</a>
+                    <a id="clearBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="clearForm()">清空</a>
+                    <a id="searchOrderPrint" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-print" onclick="printOrderList()">打印</a>
+                </td>
+            </tr>
+            <tr>
+                <td>请输入供货单位：</td>
+                <td><input id="select_vendor" class="textinput"></td>
+            </tr>
+            <tr>
+                <td width="160">请输入药品通用名称：</td>
+                <td  width="380"><input id="select_drug"  class="textinput"></td>
+            </tr>
+            <tr>
+                <td width="160">请输入批号：</td>
+                <td  width="380"><input id="select_lotnumber"  class="textinput"></td>
+            </tr>
+            <tr>
+                <td width="160">类型：</td>
+                <td  width="380">
+                    <input id="all" value="all" name="drugtype" type="radio" checked="checked">全部
+                    <input id="split" value="split" name="drugtype" type="radio">拆零
+                    <input id="common" value="common" name="drugtype" type="radio">非拆零
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="数据查询" iconCls="wy-icon-table" border="false" >
+        <div class="wy-centerbox">
+
+
+            <!-- 列表开始 -->
+            <div id="list_div">
+                <table id="dg" >
+                    <thead>
+                    <tr>
+                        <th field="saleDate" halign="center" >销售时间</th>
+                        <th field="salesperson" halign="center" >销售员</th>
+                        <th field="scode"  halign="center" >单号</th>
+                        <th field="genericName" halign="center" >通用名称</th>
+                        <th field="lotnumber" halign="center" >批号</th>
+                        <th field="dosageForm" halign="center" >剂型</th>
+                        <th field="specification" halign="center" >规格</th>
+                        <th field="lotnumber" halign="center" >批号</th>
+                        <th field="manufacturer" halign="center" >生产厂商</th>
+                        <th field="periodOfValidity" halign="center" >有效期至</th>
+                        <th field="retailPriceString" halign="center" align="right" >零售价(元)</th>
+                        <th field="realPriceString" halign="center" align="right"  >实际售价(元)</th>
+                        <th field="saleCountSplitSpecificationsString" halign="center" align="right" >购买数量</th>
+                        <th field="unitPriceString" halign="center" align="right" >金额(元)</th>
+                        <th field="splitPeople" halign="center" align="center" >分拆员</th>
+                        <th field="splitTime" halign="center" align="center" >分拆时间</th>
+                        <th field="checkPeople" halign="center" align="center" >复核员</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <!-- 列表结束 -->
+
+            <!-- 打印列表开始 -->
+            <div id="print_div" style="display:none;">
+                <table id="print_dg" >
+                    <thead>
+                    <tr>
+                        <th field="saleDate" halign="center" >销售时间</th>
+                        <th field="salesperson" halign="center" >销售员</th>
+                        <!-- <th field="scode" halign="center" >单号</th> -->
+                        <th field="genericName" halign="center" >通用名称</th>
+                        <th field="lotnumber" halign="center" >批号</th>
+                        <th field="dosageForm" halign="center" >剂型</th>
+                        <th field="specification" halign="center" >规格</th>
+                        <th field="lotnumber" halign="center" >批号</th>
+                        <th field="manufacturer" halign="center" >生产厂商</th>
+                        <th field="periodOfValidity" halign="center" >有效期至</th>
+                        <!-- <th field="retailPriceString" halign="center" align="right" >零售价(元)</th> -->
+                        <th field="realPriceString" halign="center" align="right"  >实际售价(元)</th>
+                        <th field="saleCountSplitSpecificationsString" halign="center" align="right" >购买数量</th>
+                        <th field="unitPriceString" halign="center" align="right" >金额(元)</th>
+                        <th field="splitPeople" halign="center" align="center" >分拆员</th>
+                        <th field="splitTime" halign="center" align="center" >分拆时间</th>
+                        <th field="checkPeople" halign="center" align="center" >复核员</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <!-- 打印结束 -->
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $('#dg').datagrid({toolbar: '#toolbar',rownumbers: true});
+    $('#print_dg').datagrid({rownumbers: true});
+
+
+    function searchOrderList(){
+
+        var bb = $('#date_begin').datebox('getValue');
+        var ee = $('#date_end').datebox('getValue');
+        var vendor = $('#select_vendor').val();
+        var drug = $('#select_drug').val();
+        var lotnumber = $('#select_lotnumber').val();
+        var drugtypeElements = document.searchform.drugtype;
+        var drugtype = '';
+        for(var i=0; i < drugtypeElements.length; i++){
+            if(drugtypeElements[i].checked){
+                drugtype = drugtypeElements[i].value;
+            }
+        }
+        //console.log(drugtype);
+
+        if(drugtype == 'common'){
+            $('#dg').datagrid('hideColumn','splitPeople');
+            $('#dg').datagrid('hideColumn','splitTime');
+            $('#dg').datagrid('hideColumn','checkPeople');
+
+            $('#print_dg').datagrid('hideColumn','splitPeople');
+            $('#print_dg').datagrid('hideColumn','splitTime');
+            $('#print_dg').datagrid('hideColumn','checkPeople');
+        }else{
+            $('#dg').datagrid('showColumn','splitPeople');
+            $('#dg').datagrid('showColumn','splitTime');
+            $('#dg').datagrid('showColumn','checkPeople');
+
+            $('#print_dg').datagrid('showColumn','splitPeople');
+            $('#print_dg').datagrid('showColumn','splitTime');
+            $('#print_dg').datagrid('showColumn','checkPeople');
+        }
+
+        var url = 'sale/record/itemlist_json_print';
+        var params = {
+            beginDate:bb,
+            endDate:ee,
+            vendor:vendor,
+            drug:drug,
+            lotnumber:lotnumber,
+            drugtype: drugtype
+        };
+
+        $('#dg').datagrid({
+            url: url,
+            rownumbers: true,
+            pagination: false,
+            showFooter: true,
+            queryParams:params
+        });
+
+        $('#print_dg').datagrid({
+            url: url,
+            rownumbers: true,
+            pagination: false,
+            showFooter: true,
+            queryParams:params
+        });
+    }
+
+    //一直隐藏的datagrid，用于打印
+    function printOrderList(){
+
+        var bb = $('#date_begin').datebox('getValue');
+        var ee = $('#date_end').datebox('getValue');
+        var printTitle = '';
+        if(bb == ee){
+            printTitle = bb + ' 销售记录';
+        }else{
+            printTitle = bb + ' 至 ' + ee + ' 销售记录';
+        }
+
+        CreateDataGridPage($('#print_dg'), printTitle);
+
+    }
+
+
+    function clearForm(){
+        $('#date_begin').datebox('setValue','');
+        $('#date_end').datebox('setValue','');
+        $('#select_vendor').val('');
+        $('#select_drug').val('');
+        $('#select_lotnumber').val('');
+        $('#all').prop('checked', true);
+    }
+
+</script>

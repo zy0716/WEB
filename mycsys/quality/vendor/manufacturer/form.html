@@ -1,0 +1,311 @@
+
+
+
+<div class="wy-centerbox">
+    <form id="fm" method="post" action="quality/vendor/agent/save.json">
+        <input type="hidden" name="id" >
+        <div id="tb" class="easyui-tabs">
+            <script type="text/javascript" src="js/pinyin.js"></script>
+            <script type="text/javascript">
+
+                function queryPinyin(fieldName){
+
+                    $('#searchKey').combogrid('clear');
+
+                    var name = $.trim($('#' + fieldName).val());
+                    var searchKey = $.trim($('#searchKey').val());
+
+                    if(name == '') {
+                        return;
+                    }
+                    if(searchKey != '') {
+                        return;//如果已定义则不需要自动生成
+                    }
+                    var arrRslt = makePy(name);
+
+
+                    if(arrRslt.length >= 1){
+
+                        var data = [];
+                        $.each(arrRslt, function(i,n){
+                            item = {id: n, name: n};
+                            data.push(item);
+                        });
+
+                        $('#searchKey').combogrid({
+                            idField: 'id',
+                            textField: 'name',
+                            data:  data,
+                            columns:[[
+                                {field:'name',title:'查询关键字'}
+                            ]]
+                        });
+
+                        $('#searchKey').combogrid('setValue',data[0].name);
+                        $('#searchKey').combogrid('showPanel');
+
+                    }
+                }
+            </script>
+            <div title="基本信息" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">企业名称：</td>
+                        <td><input id="name" name="name" type="text" class="textinput easyui-validatebox" required="true" onchange="queryPinyin('name');" /></td>
+                    </tr>
+                    <tr>
+                        <td class="table-title">查询关键字：</td>
+                        <td><input id="searchKey" name="searchKey" class="easyui-combogrid"  /></td>
+                    </tr>
+                    <tr>
+                        <td>档案号</td>
+                        <td><input name="fileNumber" type="text" class="textinput" /></td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div title="药品经营许可证">
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">证号：</td>
+                        <td><input name="infoLicenseForTrading.licenceNumber" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>企业名称：</td>
+                        <td><input name="infoLicenseForTrading.enterpriseName" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>注册地址：</td>
+                        <td><input name="infoLicenseForTrading.registerAddress" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>法定代表人：</td>
+                        <td><input name="infoLicenseForTrading.legalPerson" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>企业负责人：</td>
+                        <td><input name="infoLicenseForTrading.enterpriseManager" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>质量负责人：</td>
+                        <td><input name="infoLicenseForTrading.qualityManager" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>仓库地址：</td>
+                        <td><textarea name="infoLicenseForTrading.warehouseAddress" class="textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>有效期至：</td>
+                        <td><input name="infoLicenseForTrading.validityDate" type="text" class="easyui-datebox" editable="false" required="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>经营方式：</td>
+                        <td><input name="infoLicenseForTrading.businessPractice" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>经营范围：</td>
+                        <td><input id="infoLicenseForTrading_businessScope" name="infoLicenseForTrading.businessScope"  required="true"/></td>
+                    </tr>
+                    <tr>
+                        <td>发证机关：</td>
+                        <td><input name="infoLicenseForTrading.certificateDept" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>发证日期：</td>
+                        <td><input name="infoLicenseForTrading.certificateDate" type="text" class="easyui-datebox" editable="false"/></td>
+                    </tr>
+                </table>
+            </div>
+            <div title="营业执照" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">注册号：</td>
+                        <td><input name="infoLicenseForBusiness.registerNumber" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>名称：</td>
+                        <td><input name="infoLicenseForBusiness.name" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>住所：</td>
+                        <td><input name="infoLicenseForBusiness.domicile" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>法定代表人姓名：</td>
+                        <td><input name="infoLicenseForBusiness.legalPersonName" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>注册资本：</td>
+                        <td><input name="infoLicenseForBusiness.registerPrincipal" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>实收资本：</td>
+                        <td><input name="infoLicenseForBusiness.actualPrincipal" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>公司类型：</td>
+                        <td><input name="infoLicenseForBusiness.companyType" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>经营范围：</td>
+                        <td><textarea name="infoLicenseForBusiness.scope" class="textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>成立日期：</td>
+                        <td><input name="infoLicenseForBusiness.dateOfEstablishment" type="text" class="easyui-datebox" editable="false" /></td>
+                    </tr>
+                    <tr>
+                        <td>营业期限自：</td>
+                        <td><input name="infoLicenseForBusiness.allotedTimeFrom" type="text" class="easyui-datebox" editable="false" /></td>
+                    </tr>
+                    <tr>
+                        <td>营业期限至：</td>
+                        <td><input name="infoLicenseForBusiness.allotedTimeTo" type="text" class="easyui-datebox" editable="false" required="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>发证机关：</td>
+                        <td><input name="infoLicenseForBusiness.certificateDept" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>发证日期：</td>
+                        <td><input name="infoLicenseForBusiness.certificateDate" type="text" class="easyui-datebox" editable="false" /></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div title="GSP证书">
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">证书编号：</td>
+                        <td><input name="infoGsp.certificateNumber" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>企业名称：</td>
+                        <td><input name="infoGsp.enterpriseName" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>地址：</td>
+                        <td><input name="infoGsp.enterpriseAddress" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>认证范围：</td>
+                        <td><input name="infoGsp.certificateScope" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>有效期至：</td>
+                        <td><input name="infoGsp.validityDate" type="text" class="easyui-datebox" editable="false" required="true"/></td>
+                    </tr>
+                    <tr>
+                        <td>发证机关：</td>
+                        <td><input name="infoGsp.certificateDept" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>发证日期：</td>
+                        <td><input name="infoGsp.certificateDate" type="text" class="easyui-datebox" editable="false" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div title="开户信息">
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">开户户名：</td>
+                        <td><input name="infoAccount.accountName" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>开户银行：</td>
+                        <td><input name="infoAccount.accountBank" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>帐号：</td>
+                        <td><input name="infoAccount.account" type="text" class="textinput" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div title="税务登记证">
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">税号：</td>
+                        <td><input name="infoTax.number" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>纳税人名称：</td>
+                        <td><input name="infoTax.name" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>法定代表人(负责人)：</td>
+                        <td><input name="infoTax.legalPerson" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>地址：</td>
+                        <td><input name="infoTax.address" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>登记注册类型：</td>
+                        <td><input name="infoTax.registerType" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>经营范围：</td>
+                        <td><textarea name="infoTax.businessScope" class="textarea"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>批准设立机关：</td>
+                        <td><input name="infoTax.authorizeDept" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>扣缴义务：</td>
+                        <td><input name="infoTax.withholdings" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>发证机关：</td>
+                        <td><input name="infoTax.certificateDept" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>发证日期：</td>
+                        <td><input name="infoTax.certificateDate" type="text" class="easyui-datebox" editable="false" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div title="组织机构代码证">
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">代码：</td>
+                        <td><input name="infoOrganizationCode.code" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>机构名称：</td>
+                        <td><input name="infoOrganizationCode.name" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>机构类型：</td>
+                        <td><input name="infoOrganizationCode.type" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>地址：</td>
+                        <td><input name="infoOrganizationCode.address" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>有效期自：</td>
+                        <td><input name="infoOrganizationCode.validityTimeFrom" type="text" class="easyui-datebox" editable="false" /></td>
+                    </tr>
+                    <tr>
+                        <td>有效期至：</td>
+                        <td><input name="infoOrganizationCode.validityTimeTo" type="text" class="easyui-datebox" editable="false" required="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>颁发单位：</td>
+                        <td><input name="infoOrganizationCode.certificateDept" type="text" class="textinput" editable="false" /></td>
+                    </tr>
+                    <tr>
+                        <td>登记号：</td>
+                        <td><input name="infoOrganizationCode.registerNumber" type="text" class="textinput" editable="false" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="padding:5px 0;text-align:center;">
+            <a id="saveBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-save" onclick="saveItem($('#fm'))">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelItem()">取消</a>
+        </div>
+    </form>
+</div>

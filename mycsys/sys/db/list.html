@@ -1,0 +1,90 @@
+
+
+
+<div id="toolbar">
+
+    <a id="backupBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-dbsave" onclick="backupDB()">备份数据库</a>
+    <span id="backupmsg"></span>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="destroyItems('sys/db/deleteitems')">删除备份数据</a>
+</div>
+
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="数据列表" iconCls="wy-icon-table" border="false" >
+        <div class="wy-centerbox">
+            <!-- 列表开始 -->
+            <table id="dg"  url="mdcsys/sys/db/listjson.json" >
+                <thead>
+                <tr>
+                    <th data-options="field:'id',checkbox:true"></th>
+                    <!-- <th field="edit1" formatter="editRowFormatter" halign="center" align="center" >备份还原</th> -->
+                    <th field="backDate" halign="center">备份时间</th>
+                    <th field="filepath" halign="center">文件路径</th>
+                    <th field="filename" halign="center">文件名</th>
+                </tr>
+                </thead>
+            </table>
+            <!-- 列表结束 -->
+        </div>
+    </div>
+    <!-- <div region="east" style="width:690px;" split="true" border="false" collapsed="true"></div> -->
+</div>
+
+<script type="text/javascript">
+
+    $('#dg').datagrid({
+        rownumbers: true,
+        pagination: true,
+        singleSelect:false,
+        toolbar: '#toolbar',
+        pageSize: 20
+    });
+
+    function backupDB(){
+
+        $("#backupBtn").linkbutton('disable');
+        $("#backupmsg").html('正在备份...');
+
+        $.get('sys/db/backup',function(result){
+            if (result.msg == "success"){
+                $('#dg').datagrid('reload');
+                showMsg(result.txt);
+
+                $("#backupBtn").linkbutton('enable');
+                $("#backupmsg").html('备份成功！');
+
+            } else if(result.msg == "error"){
+                showError(result.txt);
+
+                $("#backupBtn").linkbutton('enable');
+                $("#backupmsg").html('备份失败！');
+            }
+        },'json');
+    }
+
+    function undo(e,id){
+
+        stopPropagation(e);
+
+        $.messager.confirm('警告','您确定要将选择的备份数据还原到程序中吗?',function(r){
+            if (r){
+                $.get('sys/db/undo',{id:id},function(result){
+                    if (result.msg == "success"){
+                        $('#dg').datagrid('reload');
+                        showMsg(result.txt);
+                    } else if(result.msg == "error"){
+                        showError(result.txt);
+                    }
+                },'json');
+            }
+        });
+
+    }
+
+    function editRowFormatter(value,row,index){
+
+        var enable = '<span title="备份还原" class="undoColumn" onclick="undo(event,'+row.id+')" ></span>';
+        return enable;
+    }
+
+
+</script>

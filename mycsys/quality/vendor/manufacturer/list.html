@@ -1,0 +1,153 @@
+
+
+
+<div id="toolbar">
+    <a id="newItemBtn" onclick="newItem({formUrl:'quality/vendor/agent/form.html',callbackFun:initFormValue});" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" >增加供货单位</a>
+    <a id="deleteItemsBtn" onclick="destroyItems('quality/vendor/agent/deleteitems');" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" >删除供货单位</a>
+</div>
+
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="数据列表" iconCls="wy-icon-table" border="false" >
+        <div class="wy-centerbox">
+
+        <table id="dg" url="quality/vendor/agent/listjson.json" >
+            <thead>
+            <tr>
+                <th data-options="field:'id',checkbox:true"></th>
+
+                <th field="edit" formatter="rowformater" halign="center" align="center" >操作</th>
+                <th field="name" halign="center">企业名称</th>
+                <th field="searchKey" halign="center">查询关键字</th>
+                <th field="fileNumber" halign="center">档案号</th>
+            </tr>
+            </thead>
+        </table>
+
+        </div>
+    </div>
+    <div region="east" style="width:690px;" split="true" border="false" collapsed="true"></div>
+
+</div>
+
+<script type="text/javascript">
+
+
+    //表格配置
+    $('#dg').datagrid({
+        rownumbers: true,
+        pagination: true,
+        singleSelect:false,
+        striped: true,
+        toolbar: '#toolbar',
+        pageSize: 20
+    });
+
+    //操作列配置
+    function rowformater(value,row,index){
+
+        var dataUrl = 'quality/vendor/agent/itemjson.json';
+        var formUrl = 'quality/vendor/agent/form.html';
+        var agreementFormUrl = 'quality/vendor/agent/agreement_form.html';
+        var edit = '<span title="详细信息" class="editColumn" onclick="editItem(event, {dataUrl:\''+dataUrl+'\', formUrl:\''+formUrl+'\', callbackFun:showFormValue})" ></span>';
+        var sale = '<span title="销售人员" class="saleColumn" onclick="showSaleList(event,'+row.id+', \''+row.name+'\')" ></span>';
+        var variety = '<span title="药品档案" class="pillColumn" onclick="showDrugList(event,'+row.id+', \''+row.name+'\')" ></span>';
+        var agreement = '<span title="质量保证协议" class="scriptColumn" onclick="editItem(event,{dataUrl:\''+dataUrl+'\', formUrl:\''+agreementFormUrl+'\',callbackFun:showAgreementFormValue,title:\'质量保证协议\',icon:\'wy-icon-agreement\'})" ></span>';
+
+        return edit + sale + variety + agreement;
+    }
+
+    //编辑表单加载
+    function showFormValue(data){
+
+        //初始化药品经营许可证：经营范围下拉列表
+        $('#infoLicenseForTrading_businessScope').combogrid({
+            panelWidth:200,
+            width: 355,
+            editable: false,
+            multiple: true,
+            idField:'name',
+            textField:'name',
+            url:'quality/basic/trading_range/find_all_tradingrange_json.json',
+            columns:[[
+                {field:'ck',checkbox:true},
+                {field:'name',title:'名称',width:150}
+            ]]
+        });
+
+
+        //console.log("callbackFun");
+        var dataReBuild = {
+            'id': data.id,
+            'name': data.name,
+            'fileNumber': data.fileNumber
+        };
+
+        var tabList = ['infoLicenseForTrading',//药品经营许可证
+            'infoLicenseForBusiness',//企业法人营业执照
+            'infoGsp',//gsp证书
+            'infoAccount',//开户信息
+            'infoTax',//税务登记证
+            'infoOrganizationCode'//组织机构代码证
+        ];
+        for(var i = 0; i < tabList.length; i++){
+            dataReBuild = $.extend(dataReBuild, buildDataProp(tabList[i], data));
+        }
+
+        $('#fm').form('load',dataReBuild);
+
+        //给药品经营许可正的经营范围赋值：
+        $('#infoLicenseForTrading_businessScope').combogrid(
+                'setValues', data.infoLicenseForTrading.businessScope.split(',')
+        );
+    }
+
+    //质量保证协议表单
+    function showAgreementFormValue(data){
+
+        var dataReBuild = {
+            'id': data.id,
+            'name': data.name
+        };
+
+        var tabList = ['agreement'];
+        for(var i = 0; i < tabList.length; i++){
+            dataReBuild = $.extend(dataReBuild, buildDataProp(tabList[i], data));
+        }
+
+        $('#agreement_fm').form('load',dataReBuild);
+        $('#name').text(data.name);
+    }
+
+    //新建表单加载
+    function initFormValue(){
+
+        //初始化药品经营许可证：经营范围下拉列表
+        $('#infoLicenseForTrading_businessScope').combogrid({
+            panelWidth:200,
+            width: 355,
+            editable: false,
+            multiple: true,
+            idField:'name',
+            textField:'name',
+            url:'quality/basic/trading_range/find_all_tradingrange_json.json',
+            columns:[[
+                {field:'ck',checkbox:true},
+                {field:'name',title:'名称',width:150}
+            ]]
+        });
+
+    }
+
+    //显示销售人员列表
+    function showSaleList(e,id,name){
+        stopPropagation(e);
+        open1('quality/sale/list_of_vendor.html' );
+    }
+
+    //显示药品列表
+    function showDrugList(e,id,name){
+        stopPropagation(e);
+        open1('quality/drug/agent/list_of_vendor.html');
+    }
+
+</script>

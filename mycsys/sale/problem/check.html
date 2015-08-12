@@ -1,0 +1,239 @@
+
+
+
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="请选择问题药品" iconCls="wy-icon-table" border="false" >
+        <div class="wy-centerbox">
+            <form id="problem_fm" method="post" action="sale/problem/save_and_send">
+                <input type="hidden" name="id" >
+                <input type="hidden" name="drugStorage.id" >
+                <table class="wy-form-table wy-search-table">
+
+                    <tr>
+                        <td width="48"><img src="images/Search-11.png"></td>
+                        <td width="260">请输入查询关键字或通用名称或商品名称搜索：</td>
+                        <td>
+                            <input id="cg" style="width:280px" />
+                            <a id="saveBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-send-record" style="vertical-align:middle;"  onclick="selectDrug()">发送至质量管理员</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" style="vertical-align:middle;" onclick="clearFormInfo()">清空</a>
+                        </td>
+                    </tr>
+                </table>
+                <table class="wy-form-table">
+                    <tr>
+                        <th colspan="2">问题报告</th>
+                    </tr>
+                    <tr>
+                        <td class="table-title">存在问题：</td>
+                        <td><input name="checkDiscription" class="textinput easyui-validatebox" required="true"></td>
+                    </tr>
+                    <tr>
+                        <td>问题数量：</td>
+                        <td>
+                            <input id="countLock1" name="countLock" class="textinputnumber easyui-numberbox" min="1" required="true" />
+                            <span class="splitSpecifications"></span>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <td>处理和预防措施：</td>
+                        <td>
+                            <input id="checkMethod" name="checkMethod" />
+                        </td>
+                    </tr> -->
+                </table>
+                <table class="wy-form-table">
+
+                    <tr>
+                        <th colspan="2">库存信息</th>
+                    </tr>
+                    <tr>
+                        <td class="table-title">批号：</td>
+                        <td><span id="lotnumber"></span></td>
+                    </tr>
+                    <tr>
+                        <td>可用库存：</td>
+                        <td><span id="count"></span></td>
+                    </tr>
+                    <tr>
+                        <td>锁定库存：</td>
+                        <td><span id="countLock"></span></td>
+                    </tr>
+                    <tr>
+                        <td>进价(元)：</td>
+                        <td><span id="price"></span></td>
+                    </tr>
+                    <tr>
+                        <td>零售价(元)：</td>
+                        <td><span id="retailPrice"></span></td>
+                    </tr>
+                    <tr>
+                        <td>生产日期：</td>
+                        <td><span id="pruduceDate"></span></td>
+                    </tr>
+                    <tr>
+                        <td>有效期至：</td>
+                        <td><span id="periodOfValidity"></span></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">药品信息</th>
+                    </tr>
+                    <tr>
+                        <td class="table-title">通用名称：</td>
+                        <td><span id="genericName"></span></td>
+                    </tr>
+                    <tr>
+                        <td>商品名称：</td>
+                        <td><span id="productName"></span></td>
+                    </tr>
+                    <tr>
+                        <td>剂型：</td>
+                        <td><span id="dosageForm"></span></td>
+                    </tr>
+                    <tr>
+                        <td>规格：</td>
+                        <td><span id="specification"></span></td>
+                    </tr>
+                    <tr>
+                        <td>生产厂商：</td>
+                        <td><span id="manufacturer"></span></td>
+                    </tr>
+                    <tr>
+                        <td>供货单位：</td>
+                        <td><span id="vendor"></span></td>
+                    </tr>
+                    <tr>
+                        <td>批准文号：</td>
+                        <td><span id="approvalNumber"></span></td>
+                    </tr>
+                    <tr>
+                        <td>药品范围：</td>
+                        <td><span id="drugRang"></span></td>
+                    </tr>
+                    <tr>
+                        <td>储存条件：</td>
+                        <td><span id="storageCondition"></span></td>
+                    </tr>
+                    <tr>
+                        <td>药品类别：</td>
+                        <td><span id="drugCategory"></span></td>
+                    </tr>
+                    <tr>
+                        <td>是否拆零(拆零规格)：</td>
+                        <td><span id="openStock"></span></td>
+                    </tr>
+                    <tr>
+                        <td>管制药品(类别|数量)：</td>
+                        <td><span id="controlledDrug"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td>中药饮片产地：</td>
+                        <td><span id="chineseMedicineArea"></span></td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //初始化处理措施下拉列表
+    /* $('#checkMethod').combobox({
+     url:'common/find_all_resolvemethod_json',
+     valueField:'name',
+     textField:'name'
+     }); */
+
+
+    $('#cg').combogrid({
+        delay: 500,
+        panelWidth:690,
+        url: 'sale/problem/form/drugstorage_listjson',
+        idField:'id',
+        textField:'genericName',
+        mode:'remote',
+        columns:[[
+            {field:'genericName',title:'通用名称'},
+            {field:'productName',title:'商品名称'},
+            {field:'specification',title:'规格'},
+            {field:'manufacturer',title:'生产厂商'},
+            {field:'lotnumber',title:'批号'}
+        ]],
+        onSelect:function(rowIndex, rowData){
+
+            //先清空，再重新填充
+            clearDrugTable();
+            clearStorageTable();
+
+            showDrugTable(rowData);//药品信息
+            showStorageTable(rowData);//库存信息
+
+            $('#problem_fm')[0].id.value = '';
+            $('#problem_fm')[0]["drugStorage.id"].value = rowData.id;
+
+            $('#problem_fm')[0].checkDiscription.value = '';
+            $('#countLock1').numberbox('setValue','');
+        }
+    });
+
+    //问题数量不能大于可用库存数量
+    $('#countLock1').numberbox({'onChange': function(newValue,oldValue){
+        var problemCount = newValue;
+        var storageCount = parseInt($('#count').html());
+
+        if(parseInt(problemCount) > parseInt(storageCount)){
+            showWarn('问题数量不能超过可用库存数量：' + storageCount);
+            $('#countLock1').numberbox('setValue', storageCount);
+        }
+    }});
+
+
+    function clearFormInfo(){
+
+        $('#problem_fm').form('clear');
+
+        clearDrugTable();
+        clearStorageTable();
+    }
+
+
+    function selectDrug(){
+
+        var thisform = $('#problem_fm');
+        thisform.form('submit',{
+            url: thisform[0].action,
+            onSubmit: function(){
+
+                if($('#cg').combogrid('getValue') == '' || $('#genericName').text() == ''){
+                    showWarn('请选择药品');
+                    return false;
+                }
+
+                if(!$(this).form('validate')){
+                    showWarn('请检查数据是否填写完整和正确');
+                    return false;
+                }
+
+                $('#saveBtn').linkbutton('disable');
+                return true;
+            },
+            success: function(result){
+
+                result = eval('(' + result + ')');  // change the JSON string to javascript object
+                if (result.msg == "success"){
+
+                    //显示提示
+                    showMsg(result.txt);
+                    clearFormInfo();
+                }else if(result.msg == "warn"){
+                    showWarn(result.txt);
+                }
+                $('#saveBtn').linkbutton('enable');
+            }
+        });
+
+    }
+
+</script>

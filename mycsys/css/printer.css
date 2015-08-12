@@ -1,0 +1,78 @@
+@CHARSET "UTF-8";
+.myPrintArea .textinput{
+    height: 20px;
+    line-height: 20px;
+}
+
+.myPrintArea table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 auto;
+}
+
+.myPrintArea caption{
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+    padding: 5px;
+}
+
+.myPrintArea td{
+    border: 1px solid #000000;
+    color: #000000;
+    padding: 2px;
+}
+
+.myPrintArea th{
+    border: 1px solid #000000;
+    color: #000000;
+    padding: 2px;
+}
+
+
+.order{
+    width:57mm;
+    border:solid 0px black;
+    padding: 3mm;
+    text-align: left;
+}
+
+.order .company{
+    text-align: center;
+    margin: 3mm 0;
+}
+.order .line{
+    width:100%;
+    border-bottom:dotted 1px black;
+    margin:3mm 0;
+}
+
+.order .guige{
+    width:60%;
+    display: inline-block;
+}
+
+.order .pihao{
+    width:35%;
+    display: inline-block;
+}
+
+.order .danjia{
+    width:30%;
+    display: inline-block;
+}
+
+.order .shuliang{
+    width:30%;
+    display: inline-block;
+}
+
+.order .jiage{
+    width:35%;
+    display: inline-block;
+}
+
+.order .goodbye{
+    text-align: center;
+    margin: 3mm 0;
+}
