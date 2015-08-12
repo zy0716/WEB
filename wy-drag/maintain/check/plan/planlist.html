@@ -1,0 +1,138 @@
+
+
+
+
+<div id="toolbar">
+
+
+
+    <div style="color:red;padding:10px 0;">系统中还没有任何陈列检查计划：请确定每月陈列检查的时间，在当天陈列检查时点击“生成陈列检查计划”按钮，生成截至所选日期的计划</div>
+
+
+    <input id="genarateDate" name="genarateDate" value="2015-8-9" type="text" class="easyui-datebox" required="true" readonly="readonly">
+    <a id="savePlan" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-table" onclick="genarateCheckReport()">生成陈列检查计划</a>
+    <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-send-record" onclick="sendTo('maintain/check/plan/torecord')">生成陈列检查记录</a> -->
+    <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="destroyItems('maintain/check/plan/deleteitems')">删除陈列检查计划</a> -->
+
+
+</div>
+
+<div id="ly"  class="easyui-layout" fit="true" border="false">
+    <div region="center" title="数据列表" iconCls="wy-icon-table" border="false" >
+        <div class="wy-centerbox">
+            <!-- 列表开始 -->
+            <table id="dg" url="maintain/check/plan/plan_list_json">
+                <thead>
+                <tr>
+                    <!-- <th data-options="field:'id',checkbox:true"></th> -->
+                    <th field="edit1" formatter="rowformater" halign="center" align="center" >查看计划列表</th>
+                    <th field="genarateDate" halign="center">计划日期</th>
+                    <th field="finishedString" halign="center" formatter="finishedRowformater" width="250">完成情况</th>
+                    <th field="edit2" formatter="sendToRecordRowformater" halign="center" align="center" >生成陈列检查记录</th>
+                </tr>
+                </thead>
+            </table>
+            <!-- 列表结束 -->
+        </div>
+    </div>
+    <!-- <div region="east" style="width:690px;" split="true" border="false" collapsed="true"></div> -->
+</div>
+
+<script type="text/javascript">
+
+    $('#dg').datagrid({
+        method:'get',
+        rownumbers: true,
+        pagination: true,
+        singleSelect:false,
+        toolbar: '#toolbar',
+        pageSize: 20
+    });
+
+    /*
+     var now = new Date();
+     var year = now.getFullYear();
+     var month = now.getMonth() + 1;
+     var day = now.getDate();
+     month = month<10?'0'+month:month;
+     theday = day<10?'0'+day:day;
+     var nowStr = year + '-' + month + '-' + day;
+     //console.log(nowStr);
+     $('#genarateDate').datebox('setValue', nowStr);
+     //$('#genarateDate').datebox('setValue', '6/1/2012');
+     */
+
+
+    function genarateCheckReport(){
+
+        if($('#genarateDate').datebox('isValid')){
+
+            $('#savePlan').linkbutton('disable');
+
+            var genarateDate = $('#genarateDate').datebox('getValue');
+
+            $.get('maintain/check/plan/genarate',{genarateDate:genarateDate},function(result){
+                if (result.msg == "success"){
+                    $('#dg').datagrid('reload');
+                    showMsg(result.txt);
+
+                    $('#savePlan').linkbutton('enable');
+                } else if(result.msg == "repeat"){
+                    showWarn(result.txt);
+
+                    $('#savePlan').linkbutton('enable');
+                }
+
+                $('#toolbar').hide();
+            },'json');
+        }
+
+    }
+
+
+    function rowformater(value,row,index){
+
+        var edit = '<span title="查看计划列表" class="tablegoColumn" onclick="open1(\'maintain/check/plan/itemlist?planId='+row.id+'\', \'查看计划列表：计划日期-'+row.genarateDate+'\')" ></span>';
+        return edit;
+    }
+
+    function sendToRecordRowformater(value,row,index){
+
+        if(row.finished == 1){
+            var edit = '<span title="生成陈列检查记录" class="sendtoColumn" onclick="sendToRecord(event,'+row.id+')" ></span>';
+            return edit;
+        }else{
+            return '<span style="color:gray;">(请在本计划全部完成后操作)</span>';
+        }
+
+
+    }
+
+    function finishedRowformater(value,row,index){
+
+        var width1 = 100 + 'px';
+        var width2 = row.finished * 100 + 'px';
+        var str = '<span style="display:inline-block;border:1px solid #DDDDDD;height:12px;width:'+width1+';">';
+        str += '<span style="display:inline-block;height:12px;background-color:#73D64B;width:'+width2+';"></span></span>';
+        str += '&nbsp;<span style="display:inline-block;width:40px">' + value + '</span>';
+        return str;
+    }
+
+    //生成陈列检查记录
+    function sendToRecord(e,id){
+        stopPropagation(e);
+
+        $.messager.confirm('警告','您确定要生成陈列检查记录吗?',function(r){
+            if (r){
+                $.get('maintain/check/plan/torecord',{id:id},function(result){
+                    if (result.msg == "success"){
+                        $('#dg').datagrid('reload');
+                        showMsg(result.txt);
+                    } else if(result.msg == "error"){
+                        showError(result.txt);
+                    }
+                },'json');
+            }
+        });
+    }
+</script>

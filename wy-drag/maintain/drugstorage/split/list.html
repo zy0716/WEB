@@ -1,0 +1,172 @@
+
+
+
+<!-- <div id="toolbar">
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="newItem('sale/controllled/storage/form')">增加库存记录</a>
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="destroyItems('sale/controllled/storage/deleteitems')">删除库存记录</a>
+</div>
+ -->
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="数据列表（在有效期内且 可用库存+锁定库存>0 的药品）" iconCls="wy-icon-table" border="false" >
+        <div class="wy-centerbox">
+            <!-- 列表开始 -->
+            <table id="dg"  url="maintain/drugstorage/split/listjson" >
+                <thead data-options="frozen:true">
+                <tr>
+                    <!-- <th data-options="field:'id',checkbox:true" rowspan="2"></th> -->
+                    <th field="edit" formatter="rowformater" halign="center" align="center" rowspan="2">操作</th>
+                    <th field="isOutOfPeriod" formatter="isOutOfPeriodRowformater" halign="center" align="center" rowspan="2">状态</th>
+
+                </tr>
+                </thead>
+                <thead>
+                <tr>
+                    <th colspan="7">库存信息<span style="color:red;">(单击"零售价"单元格可以设置参考零售价)</span></th>
+                    <th colspan="14">药品信息<span style="color:red;">(单击"查询关键字"单元格可以修改或设置查询关键字)</span></th>
+                </tr>
+                <tr>
+                    <!-- 库存信息 -->
+                    <th field="lotnumber" halign="center">批号</th>
+                    <th field="countSplitSpecificationsString" halign="center" align="right">可用库存</th>
+                    <th field="countLockSplitSpecificationsString" halign="center" align="right">锁定库存</th>
+                    <th field="priceString" halign="center" align="right">进价(元)</th>
+                    <th field="retailPriceString" halign="center" align="right" editor="{type:'numberbox',options:{precision:2}}">零售价(元)<br><label style="color:gray;font-size:10px;">单击可编辑</label></th>
+                    <th field="pruduceDate" halign="center">生产日期</th>
+                    <th field="periodOfValidity" halign="center">有效期至</th>
+
+                    <!-- 药品信息 -->
+                    <th field="genericName" halign="center">通用名称</th>
+                    <th field="searchKey" halign="center" editor="{type:'text'}">查询关键字<br><label style="color:gray;font-size:10px;">单击可编辑</label></th>
+                    <th field="productName" halign="center">商品名称</th>
+                    <th field="dosageForm" halign="center">剂型</th>
+                    <th field="specification" halign="center">规格</th>
+                    <th field="manufacturer" halign="center">生产厂商</th>
+                    <th field="vendor" halign="center">供货单位</th>
+                    <th field="approvalNumber" halign="center">批准文号</th>
+                    <th field="drugRang" halign="center">药品范围</th>
+                    <th field="storageCondition" halign="center">储存条件</th>
+                    <th field="drugCategory" halign="center">药品类别</th>
+                    <th field="splitSpecifications" halign="center">拆零规格</th>
+                    <th field="controlledDrugString" halign="center">管制药品(管制类别|管制数量)</th>
+                    <th field="chineseMedicineArea" halign="center">中药饮片产地</th>
+
+                </tr>
+                </thead>
+            </table>
+            <!-- 列表结束 -->
+        </div>
+    </div>
+    <!-- <div region="east" style="width:690px;" split="true" border="false" collapsed="true"></div> -->
+</div>
+
+<script type="text/javascript">
+
+    $('#dg').datagrid({
+        method:'get',
+        rownumbers: true,
+        pagination: true,
+        singleSelect:false,
+        toolbar: '#toolbar',
+        pageSize: 20 ,
+        onClickCell: onClickCell ,
+        onAfterEdit:onAfterEdit
+    });
+
+    function onAfterEdit(rowIndex, rowData, changes){
+
+        for(p in changes){
+            /* console.log(p);
+             console.log(changes[p]); */
+            $.post('maintain/drugstorage/saveField', {field: p, value: changes[p], id: rowData.id}, function(result){
+                showMsg(result.txt);
+            }, 'json');
+        }
+    }
+
+    $.extend($.fn.datagrid.methods, {
+        editCell: function(jq,param){
+
+            return jq.each(function(){
+                //var opts = $(this).datagrid('options');
+                var fields = $(this).datagrid('getColumnFields',true).concat($(this).datagrid('getColumnFields'));
+
+                for(var i=0; i<fields.length; i++){
+                    var col = $(this).datagrid('getColumnOption', fields[i]);
+                    col.editor1 = col.editor;
+                    if (fields[i] != param.field){
+                        col.editor = null;
+                    }
+                }
+                $(this).datagrid('beginEdit', param.index);
+                for(var i=0; i<fields.length; i++){
+                    var col = $(this).datagrid('getColumnOption', fields[i]);
+                    col.editor = col.editor1;
+                }
+            });
+        }
+    });
+    var editIndex = undefined;
+    function endEditing(){
+        if (editIndex == undefined){return true;}
+        if ($('#dg').datagrid('validateRow', editIndex)){
+            $('#dg').datagrid('endEdit', editIndex);
+            editIndex = undefined;
+
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function onClickCell(index, field){
+        if (endEditing()){
+            $('#dg').datagrid('selectRow', index)
+                    .datagrid('editCell', {index:index,field:field});
+            editIndex = index;
+        }
+    }
+
+
+
+
+    function rowformater(value,row,index){
+
+        var dataUrl = 'sale/storage/split/itemjson?id='+row.id;
+        var formUrl2 = 'sale/storage/split/print_form';
+        var edit2 = '<span title="打印" class="printColumn" onclick="editItem(event, {dataUrl:\''+dataUrl+'\', formUrl:\''+formUrl2+'\', callbackFun:showPrintFormValue, title:\'打印\', icon:\'wy-icon-print\'})" ></span>';
+
+        return edit2;
+    }
+
+    function isOutOfPeriodRowformater(value,row,index){
+
+        var str = '';
+        if(value){
+            str += '<span style="color:red">药品过期</span>';
+            if(row.checkLocked){
+                str += '<span style="color:orange">（药品正在审核）</span>';
+            }
+        }else{
+            if(row.checkLocked){
+                str += '<span style="color:orange">药品正在审核</span>';
+            }else{
+                str += '<span style="color:green">正常</span>';
+            }
+        }
+
+        return str;
+    }
+
+    function showFormValue(data){
+
+        $('#fm').form('load',data);
+        showDrugTable(data);
+        showStorageTable(data);
+    }
+
+    function showPrintFormValue(data){
+        showDrugTable(data);
+        showStorageTable(data);
+    }
+
+</script>

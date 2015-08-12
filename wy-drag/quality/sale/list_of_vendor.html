@@ -1,0 +1,69 @@
+
+
+
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="newItem({formUrl:'quality/sale/form.html'})">增加销售人员</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="destroyItems('quality/sale/deleteitems')">删除销售人员</a>
+</div>
+
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="销售人员" iconCls="wy-icon-table" border="false" >
+        <!-- <div class="wy-centerbox"> -->
+        <!-- 列表开始 -->
+        <table id="dg" url="quality/sale/list_of_vendor_json?vendorId=10" >
+            <thead>
+            <tr>
+                <th data-options="field:'id',checkbox:true"></th>
+                <th field="edit" formatter="rowformater" halign="center" align="center" >操作</th>
+                <th field="name" halign="center">销售人员姓名</th>
+                <!-- <th field="searchKey">查询关键字</th> -->
+            </tr>
+            </thead>
+        </table>
+        <!-- 列表结束 -->
+        <!-- </div> -->
+    </div>
+    <!-- <div region="east" style="width:690px;" split="true" border="false" collapsed="true"></div> -->
+</div>
+
+
+
+<script type="text/javascript">
+
+    $('#dg').datagrid({
+        rownumbers: true,
+        pagination: true,
+        singleSelect:false,
+        striped: true,
+        toolbar: '#toolbar',
+        pageSize: 20
+    });
+
+    function rowformater(value,row,index){
+
+        var dataUrl = 'quality/sale/itemjson.json';
+        var formUrl = 'quality/sale/form.html';
+        var edit = '<span title="详细信息" class="editColumn" onclick="editItem(event, {dataUrl:\''+dataUrl+'\', formUrl:\''+formUrl+'\', callbackFun:showFormValue})" ></span>';
+
+        return edit;
+    }
+
+    function showFormValue(data){
+        //console.log("callbackFun");
+
+        var dataReBuild = {
+            'id': data.id,
+            'name': data.name
+        };
+
+        var tabList = ['idCard',//身份证
+            'authorizationOfSales'//授权委托书
+        ];
+        for(var i = 0; i < tabList.length; i++){
+            dataReBuild = $.extend(dataReBuild, buildDataProp(tabList[i], data));
+        }
+
+        $('#fm').form('load',dataReBuild);
+    }
+
+</script>

@@ -1,0 +1,86 @@
+
+
+
+
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="数据列表" iconCls="wy-icon-table" border="false" >
+        <!-- <div class="wy-centerbox"> -->
+        <!-- 列表开始 -->
+        <!-- <div id="list_div"> -->
+        <table id="dg"  url="checkaccept/send/listjson.json" >
+            <thead data-options="frozen:true">
+            <tr>
+                <th field="checkStatus" halign="center" formatter="ca_checkStatusFormater" rowspan="2">验收结果</th>
+                <!-- <th field="checkLocked" halign="center" formatter="ca_checkLockedFormater" align="center"  rowspan="2">锁定状态</th> -->
+
+            </tr>
+            </thead>
+            <thead>
+            <tr>
+                <th colspan="13">验收信息</th>
+
+                <th colspan="5">采购信息</th>
+                <th colspan="13">药品信息</th>
+            </tr>
+            <tr>
+                <!-- 验收信息 -->
+                <th field="lotnumber" halign="center">批号</th>
+                <th field="realPurcheasePriceString" halign="center">实际采购价格</th>
+                <th field="pruduceDate" halign="center">生产日期</th>
+                <th field="periodOfValidity" halign="center">有效期</th>
+                <th field="arriveTime" halign="center">到货日期</th>
+                <th field="numberOfArrivalString" align="right" halign="center">到货数量</th>
+                <th field="numberOfQualifiedString" align="right" halign="center">验收合格数量</th>
+                <th field="reason" halign="center">验收结果</th>
+                <th field="checkDate" halign="center">验收日期</th>
+                <th field="inspector" halign="center">验收员</th>
+                <th field="result" halign="center">处理意见</th>
+                <th field="auditDate" halign="center">审核日期</th>
+                <th field="auditor" halign="center">审核人</th>
+                <!-- 采购信息 -->
+                <th field="purchaseOrderPriceString" halign="center" align="right">单价(元)</th>
+                <th field="purchaseOrderCount" halign="center" align="right">数量</th>
+                <th field="purchaseOrderTotalPriceString" halign="center" align="right">金额(元)</th>
+                <th field="purchaseOrderPurchaseDate" halign="center">采购日期</th>
+                <th field="purchaseOrderBuyer" halign="center">采购员</th>
+                <!-- 药品信息 -->
+                <th field="purchaseOrderGenericName" halign="center">通用名称</th>
+                <th field="purchaseOrderProductName" halign="center">商品名称</th>
+                <th field="purchaseOrderDosageForm" halign="center">剂型</th>
+                <th field="purchaseOrderSpecification" halign="center">规格</th>
+                <th field="purchaseOrderManufacturer" halign="center">生产厂商</th>
+                <th field="purchaseOrderVendor" halign="center">供货单位</th>
+                <th field="purchaseOrderApprovalNumber" halign="center">批准文号</th>
+                <th field="purchaseOrderDrugRang" halign="center">药品范围</th>
+                <th field="purchaseOrderStorageCondition" halign="center">储存条件</th>
+                <th field="purchaseOrderDrugCategory" halign="center">药品类别</th>
+                <th field="purchaseOrderOpenStockString" halign="center">是否拆零(拆零规格)</th>
+                <th field="purchaseOrderControlledDrugString" halign="center">管制药品(管制类别|管制数量)</th>
+                <th field="purchaseOrderChineseMedicineArea" halign="center">中药饮片产地</th>
+            </tr>
+
+            </thead>
+
+        </table>
+        <!-- </div> -->
+        <!-- 列表结束 -->
+
+
+        <!-- </div> -->
+    </div>
+    <!-- <div region="east" style="width:690px;" split="true" border="false" collapsed="true"></div> -->
+</div>
+
+<script type="text/javascript">
+
+    $('#dg').datagrid({
+        method:'get',
+        rownumbers: true,
+        pagination: true,
+        singleSelect:false,
+        striped: true,
+        toolbar: '#toolbar',
+        pageSize: 20
+    });
+
+</script>

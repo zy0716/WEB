@@ -1,0 +1,73 @@
+
+
+
+<div class="wy-centerbox">
+    <form id="fm" method="post" action="quality/sale/save.json" >
+        <input type="hidden" name="id" >
+        <div id="tb" class="easyui-tabs">
+            <div title="基本信息" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">销售人员姓名：</td>
+                        <td><input name="name" type="text" class="textinput easyui-validatebox" required="true" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div title="销售人员身份证" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">姓名</td>
+                        <td><input name="idCard.cardName" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>公民身份证号码</td>
+                        <td><input name="idCard.cardNumber" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>性别</td>
+                        <td>
+                            <input name="idCard.cardSex" type="radio" checked="checked" value="男" />男
+                            <input name="idCard.cardSex" type="radio" value="女" />女
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>民族</td>
+                        <td><input name="idCard.cardNation" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>出生日期</td>
+                        <td><input name="idCard.cardBirthday" type="text" class="easyui-datebox" editable="false" /></td>
+                    </tr>
+                    <tr>
+                        <td>住址</td>
+                        <td><input name="idCard.cardAddress" type="text" class="textinput" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div title="授权书" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">授权人姓名</td>
+                        <td><input name="authorizationOfSales.asName" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>销售品种</td>
+                        <td><input name="authorizationOfSales.asType" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>地域</td>
+                        <td><input name="authorizationOfSales.asArea" type="text" class="textinput" /></td>
+                    </tr>
+                    <tr>
+                        <td>期限</td>
+                        <td><input name="authorizationOfSales.asExpires" type="text" class="easyui-datebox" editable="false" required="true" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="padding:5px 0;text-align:center;">
+            <a id="saveBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-save" onclick="saveItem($('#fm'))">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelItem()">取消</a>
+        </div>
+    </form>
+</div>

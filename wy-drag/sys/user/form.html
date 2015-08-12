@@ -1,0 +1,45 @@
+
+
+
+<div class="wy-centerbox">
+    <form id="fm" method="post" action="sys/user/save">
+        <input type="hidden" name="id" >
+        <div id="tb" class="easyui-tabs">
+            <div title="基本信息" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">用户名：</td>
+                        <td><input name="username" type="text" class="textinput easyui-validatebox" required="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>密码：</td>
+                        <td><input name="password" type="password" class="textinput easyui-validatebox" validType="length[4,16]"  required="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>启用：</td>
+                        <td>
+                            <input name="enabled" type="radio" checked="checked" value="true" />是
+                            <input name="enabled" type="radio" value="false" />否
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>权限：</td>
+                        <td>
+                            <!-- <input name="authorities" type="checkbox" value="ROLE_注册用户" checked="checked" class="easyui-validatebox" required="true" readonly="readonly" />注册用户<br> -->
+                            <input name="authorities" type="checkbox" value="ROLE_系统管理" />系统管理<br>
+                            <input name="authorities" type="checkbox" value="ROLE_质量管理" />质量管理<br>
+                            <input name="authorities" type="checkbox" value="ROLE_采购管理" />采购管理<br>
+                            <input name="authorities" type="checkbox" value="ROLE_验收管理" />验收管理<br>
+                            <input name="authorities" type="checkbox" value="ROLE_养护管理" />养护管理<br>
+                            <input name="authorities" type="checkbox" value="ROLE_销售管理" />销售管理
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="padding:5px 0;text-align:center;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-save" onclick="saveItem($('#fm'))">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="cancelItem()">取消</a>
+        </div>
+    </form>
+</div>

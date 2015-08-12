@@ -1,0 +1,66 @@
+
+
+
+<div class="wy-centerbox">
+    <form id="pass_fm" method="post" action="home/changepwd">
+
+        <div id="tb" class="easyui-tabs">
+            <div title="修改密码" >
+                <table class="wy-form-table">
+                    <tr>
+                        <td class="table-title">用户名：</td>
+                        <td><input style="border:0;" readonly="readonly" type="text" name="username" value="admin"></td>
+                    </tr>
+                    <tr>
+                        <td>旧密码：</td>
+                        <td><input name="oldPassword" type="password" class="textinput easyui-validatebox" required="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>新密码：</td>
+                        <td><input id="password" name="password" type="password"  class="textinput easyui-validatebox" validType="length[4,16]" required="true" /></td>
+                    </tr>
+                    <tr>
+                        <td>确认新密码：</td>
+                        <td><input name="confirmPassword" type="password" class="textinput easyui-validatebox" validType="equalTo['#password']" invalidMessage="两次输入密码不匹配" required="true" /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="padding:5px 0;text-align:center;">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-save" onclick="chengePassword()">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" onclick="$('#pass_fm')[0].reset()">重置</a>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    $.extend($.fn.validatebox.defaults.rules, {
+        /*必须和某个字段相等*/
+        equalTo: {
+            validator:function(value,param){
+                return $(param[0]).val() == value;
+            },
+            message:'字段不匹配'
+        }
+
+    });
+
+    function chengePassword(){
+        var thisform = $('#pass_fm');
+        thisform.form('submit',{
+            url: thisform[0].action,
+            onSubmit: function(){
+                return $(this).form('validate');
+            },
+            success: function(result){
+                result = eval('(' + result + ')');  // change the JSON string to javascript object
+                if (result.msg == "success"){
+                    showMsg(result.txt);
+                }else if(result.msg == "error"){
+                    showError(result.txt);
+                }
+            }
+        });
+    }
+</script>

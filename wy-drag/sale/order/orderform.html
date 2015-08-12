@@ -1,0 +1,406 @@
+
+
+
+<div id="toolbar" >
+    <div style="margin-bottom:5px">
+        <a onclick="open1('sale/order/orderform', '药品销售')" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-cart-add" >新增销售清单</a>
+        <a id="deleteOrderItem" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="deleteOrderItems()">删除选中记录</a>
+        <a id="saveOrder" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-ok" onclick="saveOrderItems()">确认销售</a>
+    </div>
+</div>
+<div id="ly" class="easyui-layout" fit="true" border="false">
+    <div region="center" title="销售清单" iconCls="wy-icon-table" border="false" >
+        <div class="wy-centerbox">
+
+            <!-- 列表开始 -->
+            <table id="dg"  >
+                <thead>
+                <tr>
+                    <th data-options="field:'id',checkbox:true"></th>
+                    <!-- <th field="edit" formatter="rowformater" halign="center" align="center" rowspan="2">操作</th> -->
+                    <th field="genericName" halign="center">通用名称</th>
+                    <th field="dosageForm" halign="center">剂型</th>
+                    <th field="specification" halign="center">规格</th>
+                    <th field="lotnumber" halign="center">批号</th>
+                    <th field="manufacturer" halign="center">生产厂商</th>
+                    <th field="periodOfValidity" halign="center">有效期至</th>
+                    <th field="retailPrice" halign="center" align="right"  >零售价(元)</th>
+                    <th field="realPrice" halign="center" align="right"  >实际售价(元)</th>
+                    <th field="saleCount" halign="center" align="right">购买数量</th>
+                    <th field="unitPrice" halign="center" align="right" formatter="unitPriceRowformater" >金额(元)</th>
+                </tr>
+                </thead>
+            </table>
+            <!-- 列表结束 -->
+
+
+
+        </div>
+    </div>
+
+    <div region="south" style="height:400px;" split="true" border="false" title="选择药品" iconCls="icon-add">
+        <div class="wy-centerbox">
+            <form id="fm" method="post">
+                <!-- <div id="tb" class="easyui-tabs">
+
+                    <div title="采购订单" > -->
+                <table class="wy-form-table wy-search-table">
+
+                    <tr>
+                        <td width="48"><img src="images/Search-11.png"></td>
+                        <td width="260">请输入查询关键字或通用名称或商品名称搜索：</td>
+                        <td>
+                            <input id="cg" style="width:280px" />
+                            <a id="saveBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="wy-icon-cart-put" style="vertical-align:middle;"  onclick="selectDrug()">选择</a>
+                            <a href="javascript:void(0)" class="easyui-linkbutton" style="vertical-align:middle;" onclick="clearFormInfo()">清空</a>
+                        </td>
+                    </tr>
+                </table>
+                <table class="wy-form-table">
+                    <tr>
+                        <td>数量：</td>
+                        <td>
+                            <input id="saleCount" name="saleCount" />
+                            <span class="splitSpecifications"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>实际售价(元)：</td>
+                        <td><input id="realPrice" name="realPrice" style="width:124px;" class="textinput easyui-numberbox" required="true" precision="2" /></td>
+                    </tr>
+                    <tr>
+                        <td>零售价(元)：</td>
+                        <td><span id="retailPrice"></span></td>
+                    </tr>
+
+
+                    <tr>
+                        <td>可用库存：</td>
+                        <td><span id="count"></span></td>
+                    </tr>
+                    <tr>
+                        <td>锁定库存：</td>
+                        <td><span id="countLock"></span></td>
+                    </tr>
+                    <tr>
+                        <td>批号：</td>
+                        <td><span id="lotnumber"></span></td>
+                    </tr>
+                    <tr>
+                        <td>生产日期：</td>
+                        <td><span id="pruduceDate"></span></td>
+                    </tr>
+                    <tr>
+                        <td>有效期至：</td>
+                        <td><span id="periodOfValidity"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-title">通用名称：</td>
+                        <td><span id="genericName"></span></td>
+                    </tr>
+                    <tr>
+                        <td>商品名称：</td>
+                        <td><span id="productName"></span></td>
+                    </tr>
+                    <tr>
+                        <td>剂型：</td>
+                        <td><span id="dosageForm"></span></td>
+                    </tr>
+                    <tr>
+                        <td>规格：</td>
+                        <td><span id="specification"></span></td>
+                    </tr>
+                    <tr>
+                        <td>生产厂商：</td>
+                        <td><span id="manufacturer"></span></td>
+                    </tr>
+                    <tr>
+                        <td>供货单位：</td>
+                        <td><span id="vendor"></span></td>
+                    </tr>
+                    <tr>
+                        <td>批准文号：</td>
+                        <td><span id="approvalNumber"></span></td>
+                    </tr>
+                    <tr>
+                        <td>药品范围：</td>
+                        <td><span id="drugRang"></span></td>
+                    </tr>
+                    <tr>
+                        <td>储存条件：</td>
+                        <td><span id="storageCondition"></span></td>
+                    </tr>
+                    <tr>
+                        <td>药品类别：</td>
+                        <td><span id="drugCategory"></span></td>
+                    </tr>
+                    <tr>
+                        <td>是否拆零(拆零规格)：</td>
+                        <td><span id="openStock"></span></td>
+                    </tr>
+                    <tr>
+                        <td>管制药品(类别|数量)：</td>
+                        <td><span id="controlledDrug"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td>中药饮片产地：</td>
+                        <td><span id="chineseMedicineArea"></span></td>
+                    </tr>
+
+
+
+                </table>
+                <!-- </div>
+
+            </div> -->
+            </form>
+        </div>
+
+        <script type="text/javascript">
+
+            var rowDataBuild = {};
+            $('#cg').combogrid({
+                delay: 500,
+                panelWidth:690,
+                url: 'sale/order/list_drug_json_by_name',
+                idField:'id',
+                textField:'genericName',
+                mode:'remote',
+                columns:[[
+                    {field:'genericName',title:'通用名称'},
+                    {field:'productName',title:'商品名称'},
+                    {field:'specification',title:'规格'},
+                    {field:'manufacturer',title:'生产厂商'},
+                    {field:'lotnumber',title:'批号'}
+                ]],
+                onSelect:function(rowIndex, rowData){
+
+                    //先清空，再重新填充
+                    clearDrugTable();
+                    clearStorageTable();
+                    $('#realPrice').numberbox('setValue','');
+
+                    showDrugTable(rowData);//药品信息
+                    showStorageTable(rowData);//库存信息
+
+                    $('#saleCount').numberspinner('setValue',1);//默认购买数量
+
+                    rowDataBuild = rowData;//用于判断购买数量是否合法，以及用于加入datagrid
+                }
+            });
+
+
+            $('#saleCount').numberspinner({
+                min: 1,
+                required: true,
+                missingMessage: '请输入数量',
+                onSpinUp: function(){
+                    checkValue($('#saleCount').numberspinner('getValue'));
+                }
+            });
+
+            $('#saleCount').keyup(function(){
+
+                checkValue($('#saleCount')[0].value);
+            });
+
+            function checkValue(v){
+                //判断管制药品购买数量
+                if(rowDataBuild.controlledDrug == '是'){
+                    if(v > rowDataBuild.countLimit){
+
+                        showWarn('购买数量超过管制药品规定，不能超过：' + rowDataBuild.countLimit);
+                        $('#saleCount').numberspinner('setValue',rowDataBuild.countLimit);
+                    }
+                }
+
+                if(v > rowDataBuild.count){
+
+                    showWarn('库存不足，库存剩余量：' + rowDataBuild.count);
+                    $('#saleCount').numberspinner('setValue',rowDataBuild.count);
+                }
+
+            }
+
+            function clearFormInfo(){
+
+                $('#fm').form('clear');
+
+                clearDrugTable();
+                clearStorageTable();
+
+
+            }
+
+            function selectDrug(){
+
+                if($('#cg').combogrid('getValue') == '' || $('#genericName').text() == ''){
+                    showWarn('请选择药品');
+                    return;
+                }
+
+                var rows = $('#dg').datagrid('getRows');
+                for(var i = 0; i < rows.length; i++){
+                    if($('#cg').combogrid('getValue') == rows[i].id){
+                        showWarn('您已选择该药品');
+                        return;
+                    }
+                }
+
+                if(!$('#fm').form('validate')){
+                    showWarn('请检查数据是否填写完整和正确');
+                    return;
+                }
+
+                rowDataBuild.saleCount = $('#saleCount').numberspinner('getValue');//购买数量
+                rowDataBuild.realPrice = $('#realPrice').numberbox('getValue');//实际售价
+                $('#dg').datagrid('appendRow',rowDataBuild);
+                $('#dg').datagrid('autoSizeColumn');  // 自动调整所有的列的宽度
+
+                clearFormInfo();
+            }
+
+
+
+
+        </script>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //$(function(){
+
+
+    $('#dg').datagrid({
+        rownumbers: true,
+        singleSelect:false,
+        toolbar: '#toolbar',
+        /* onClickCell: onClickCell,  */
+        showFooter: true,
+        data: {
+            total:0,
+            rows:[],
+            footer:[{saleCount: '应付款(元)：', unitPrice: 0}]
+        }
+    });
+
+    function unitPriceRowformater(value,row,index){
+        if(!row.id){//统计行
+            var sum = 0;
+            var data = $('#dg').datagrid('getData');
+            for(var i = 0; i < data.rows.length; i++){
+                sum += parseFloat(data.rows[i].unitPrice);
+            }
+            return sum.toFixed(2);
+        }
+
+        var unitPrice = (row.realPrice * row.saleCount).toFixed(2);
+        row.unitPrice = unitPrice;//一定别忘了赋值!!
+        $('#dg').datagrid('reloadFooter');
+        return unitPrice;
+    }
+
+
+    function deleteOrderItems(){
+
+        var rows = $('#dg').datagrid('getSelections');
+
+        if (rows.length > 0){
+            $.messager.confirm('警告','您确定要删除选中的记录吗?',function(r){
+                if (r){
+                    for(var i = 0; i < rows.length; i++){
+                        var index = $('#dg').datagrid('getRowIndex',rows[i]);
+                        $('#dg').datagrid('deleteRow',index);
+                    }
+
+                    $('#dg').datagrid('reloadFooter');
+                }
+            });
+        }else{
+            showWarn('请选择要删除的记录！');
+        }
+    }
+
+
+    function saveOrderItems(){
+
+        var data = $('#dg').datagrid('getData');
+
+
+        if(data.rows.length == 0){
+            showWarn('请选择药品');
+            return;
+        }else{
+
+            $.messager.confirm('警告','确认保存?',function(r){
+                if (r){
+                    $('#saveOrder').linkbutton('disable');
+                    $('#deleteOrderItem').linkbutton('disable');
+
+                    var orderData = [];
+                    for(var i = 0; i < data.rows.length; i++){
+                        var row = data.rows[i];
+
+                        var orderItem = {};
+                        orderItem.saleCount = row.saleCount;//销售数量
+                        orderItem.realPrice = row.realPrice;//实际价
+                        orderItem.drugStorageId = row.id;
+
+                        /* orderItem.genericName = row.genericName;//通用名称
+                         orderItem.productName = row.productName;
+                         orderItem.dosageForm = row.dosageForm;
+                         orderItem.specification = row.specification;//规格
+                         orderItem.manufacturer = row.manufacturer;//生产厂商
+                         orderItem.vendor = row.vendor;
+                         orderItem.approvalNumber = row.approvalNumbe;
+                         orderItem.drugRang = row.drugRang;
+                         orderItem.storageCondition = row.storageCondition;
+                         orderItem.drugCategory = row.drugCategory;
+                         orderItem.openStock = row.openStock;//是否拆零
+                         orderItem.splitSpecifications = row.splitSpecifications;//拆零规格
+                         orderItem.controlledDrug = row.controlledDrug;
+                         orderItem.controlledCategory = row.controlledCategory;
+                         orderItem.countLimit = 1;
+                         orderItem.chineseMedicineArea = row.chineseMedicineArea;
+
+                         orderItem.lotnumber = row.lotnumber;//批号
+                         orderItem.saleCount = row.saleCount;//销售数量
+                         orderItem.retailPrice = row.retailPrice;//零售价
+                         orderItem.realPrice = row.realPrice;//实际价
+                         orderItem.periodOfValidity = row.periodOfValidity;//有效期至
+
+                         orderItem.drugStorageId = row.id;
+                         */
+                        orderData.push(orderItem);
+                    }
+
+
+                    $.ajax({
+                        url: 'sale/order/save_order',
+                        type: 'POST',
+                        data: JSON.stringify(orderData),//必须要转换成json字符串的形式提交！！！！
+                        contentType:'application/json',//这里必须是 application/json
+                        success: function(result){
+                            if (result.msg == "success"){
+
+                                showMsg(result.txt);
+                                open1('sale/order/vieworder?id='+result.data.id, '开票');
+                            }
+                        },
+                        dataType:'json'
+                    });
+                }
+            });
+
+        }
+
+
+
+    }
+
+
+    //});
+</script>
